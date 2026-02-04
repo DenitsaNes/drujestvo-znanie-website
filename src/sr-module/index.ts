@@ -3,11 +3,15 @@
  * Export all public APIs
  */
 
-// Algorithm
-export {
+// Algorithm types
+export type {
   Card,
   CardData,
   ReviewResult,
+} from './srAlgorithm';
+
+// Algorithm functions
+export {
   createCard,
   recordReview,
   calculateNextReview,
@@ -34,6 +38,9 @@ export {
   scheduleRunner,
   scheduleRunnerWithNotifications,
   setupCronJob,
+} from './scheduler';
+
+export type {
   SchedulerCallback,
 } from './scheduler';
 

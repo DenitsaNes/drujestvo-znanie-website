@@ -7,11 +7,11 @@ import { updateUserOnboarding } from '@/lib/db/user';
 import { GermanLevel } from '@/types/user';
 import { Button } from '@/components/ui/button';
 
-type OnboardingStep = 'welcome' | 'level' | 'goal' | 'finish';
+type OnboardingStep = 'level' | 'goal' | 'finish';
 
 export default function OnboardingPage() {
   const router = useRouter();
-  const [currentStep, setCurrentStep] = useState<OnboardingStep>('welcome');
+  const [currentStep, setCurrentStep] = useState<OnboardingStep>('level');
   const [germanLevel, setGermanLevel] = useState<GermanLevel | null>(null);
   const [dailyGoal, setDailyGoal] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
@@ -19,32 +19,18 @@ export default function OnboardingPage() {
 
   useEffect(() => {
     const unsubscribe = onAuthChange(async (firebaseUser) => {
-      if (!firebaseUser) {
-        router.push('/auth/login');
-        return;
+      if (firebaseUser) {
+        setUserId(firebaseUser.uid);
+      } else {
+        setUserId(null);
       }
-
-      setUserId(firebaseUser.uid);
-
-      // Check if already completed onboarding
-      try {
-        const { getUserData } = await import('@/lib/db/user');
-        const userData = await getUserData(firebaseUser.uid);
-        if (userData?.onboardingCompleted) {
-          router.push('/dashboard');
-        }
-      } catch (error) {
-        console.error('Error checking onboarding status:', error);
-      }
+      // (Removed: Always show onboarding, even if already completed)
     });
-
     return () => unsubscribe();
   }, [router]);
 
   const handleNext = () => {
-    if (currentStep === 'welcome') {
-      setCurrentStep('level');
-    } else if (currentStep === 'level' && germanLevel) {
+    if (currentStep === 'level' && germanLevel) {
       setCurrentStep('goal');
     } else if (currentStep === 'goal') {
       setCurrentStep('finish');
@@ -52,7 +38,13 @@ export default function OnboardingPage() {
   };
 
   const handleFinish = async () => {
-    if (!userId || !germanLevel) return;
+    if (!germanLevel) return;
+
+    // If not logged in, redirect to login before saving onboarding
+    if (!userId) {
+      router.push('/auth/login');
+      return;
+    }
 
     setLoading(true);
     try {
@@ -71,164 +63,131 @@ export default function OnboardingPage() {
   };
 
   const progress = {
-    welcome: 1,
-    level: 2,
-    goal: 3,
-    finish: 4,
+    level: 1,
+    goal: 2,
+    finish: 3,
   }[currentStep];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 via-purple-50 to-white flex items-center justify-center p-4">
       <div className="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-8 sm:p-12">
-        {/* Progress indicator */}
+        {/* Progress indicator - purple themed */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-gray-600">Step {progress} of 4</span>
-            <span className="text-sm font-medium text-gray-600">{Math.round((progress / 4) * 100)}%</span>
+            <span className="text-sm font-medium text-purple-700">Step {progress} of 3</span>
+            <span className="text-sm font-medium text-purple-700">{Math.round((progress / 3) * 100)}%</span>
           </div>
-          <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="w-full h-2 bg-purple-200 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300"
-              style={{ width: `${(progress / 4) * 100}%` }}
+              className="h-full bg-purple-500 transition-all duration-300"
+              style={{ width: `${(progress / 3) * 100}%` }}
             />
           </div>
         </div>
 
-        {/* Welcome Step */}
-        {currentStep === 'welcome' && (
-          <div className="text-center space-y-6">
-            <div className="text-6xl mb-4">🐾</div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              Welcome to Minka 🐾
-            </h1>
-            <p className="text-lg text-gray-600">
-              Let&apos;s personalize your German journey.
-            </p>
-            <p className="text-base text-gray-500">
-              We&apos;ll ask you a few quick questions to get started.
-            </p>
-            <Button onClick={handleNext} size="lg" variant="accent" className="mt-6">
-              Next
-            </Button>
-          </div>
-        )}
-
         {/* Level Selection Step */}
         {currentStep === 'level' && (
-          <div className="space-y-6">
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                What&apos;s your current German level?
+          <div className="flex flex-col items-center justify-center min-h-[60vh]">
+            <div className="w-full max-w-2xl flex flex-col items-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-purple-800 mb-10 text-center">
+                Do you know any German?
               </h2>
-              <p className="text-gray-600">Choose the option that best describes you</p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { value: 'BEGINNER' as GermanLevel, label: 'Just starting', desc: 'New to German' },
-                { value: 'A1' as GermanLevel, label: 'A1', desc: 'Basic beginner' },
-                { value: 'A2' as GermanLevel, label: 'A2', desc: 'Elementary' },
-                { value: 'B1_PLUS' as GermanLevel, label: 'B1+', desc: 'Intermediate+' },
-              ].map((option) => (
-                <button
-                  key={option.value}
-                  onClick={() => setGermanLevel(option.value)}
-                  className={`p-6 rounded-xl border-2 transition-all text-left ${
-                    germanLevel === option.value
-                      ? 'border-purple-500 bg-purple-50'
-                      : 'border-gray-200 hover:border-purple-300 bg-white'
-                  }`}
-                >
-                  <div className="font-semibold text-lg text-gray-900">{option.label}</div>
-                  <div className="text-sm text-gray-600 mt-1">{option.desc}</div>
-                </button>
-              ))}
-            </div>
-
-            <div className="flex gap-4">
-              <Button
-                onClick={() => setCurrentStep('welcome')}
-                variant="secondary"
-                className="flex-1"
-              >
-                Back
-              </Button>
-              <Button
+              <div className="flex flex-col gap-4 w-full items-center mb-12">
+                {[
+                  { value: 'BEGINNER' as GermanLevel, label: 'I am a complete beginner' },
+                  { value: 'A1' as GermanLevel, label: 'Not much' },
+                  { value: 'A2' as GermanLevel, label: 'I know some common words and phrases' },
+                  { value: 'B1_PLUS' as GermanLevel, label: 'I am conversational in German' },
+                ].map((option) => (
+                  <button
+                    key={option.value}
+                    onClick={() => setGermanLevel(option.value)}
+                    className={`px-6 py-2 rounded-full font-medium text-base md:text-lg transition-all shadow-sm border-none focus:outline-none focus:ring-2 focus:ring-purple-400 w-fit
+                      ${germanLevel === option.value
+                        ? 'bg-purple-500 text-white scale-105'
+                        : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}
+                    `}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+              <button
                 onClick={handleNext}
-                variant="accent"
-                className="flex-1"
                 disabled={!germanLevel}
+                className={`mt-8 px-8 py-3 rounded bg-purple-700 text-white font-medium text-base flex items-center gap-2 transition-all duration-150 mx-auto
+                  ${!germanLevel ? 'opacity-50 cursor-not-allowed' : 'hover:bg-purple-800'}`}
               >
-                Next
-              </Button>
+                Continue
+                <span aria-hidden className="ml-2">→</span>
+              </button>
             </div>
           </div>
         )}
 
         {/* Goal Selection Step */}
         {currentStep === 'goal' && (
-          <div className="space-y-6">
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <div className="flex flex-col items-center justify-center min-h-[60vh]">
+            <div className="w-full max-w-2xl flex flex-col items-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-purple-800 mb-10 text-center">
                 How much time can you spend most days?
               </h2>
-              <p className="text-gray-600">This helps us personalize your learning plan</p>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {[5, 10, 15, 20].map((minutes) => (
+              <div className="flex flex-col sm:flex-row gap-4 w-full items-center mb-12 justify-center">
+                {[5, 10, 15, 20].map((minutes) => (
+                  <button
+                    key={minutes}
+                    onClick={() => setDailyGoal(minutes)}
+                    className={`px-6 py-2 rounded-full font-medium text-base md:text-lg transition-all shadow-sm border-none focus:outline-none focus:ring-2 focus:ring-purple-400 w-fit
+                      ${dailyGoal === minutes
+                        ? 'bg-purple-500 text-white scale-105'
+                        : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}
+                    `}
+                  >
+                    {minutes} min
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-4 w-full">
                 <button
-                  key={minutes}
-                  onClick={() => setDailyGoal(minutes)}
-                  className={`p-4 rounded-xl border-2 transition-all ${
-                    dailyGoal === minutes
-                      ? 'border-purple-500 bg-purple-50'
-                      : 'border-gray-200 hover:border-purple-300 bg-white'
-                  }`}
+                  onClick={() => setCurrentStep('level')}
+                  className="flex-1 px-8 py-3 rounded bg-purple-200 text-purple-800 font-medium text-base transition-all duration-150 hover:bg-purple-300"
                 >
-                  <div className="font-semibold text-xl text-gray-900">{minutes} min</div>
+                  Back
                 </button>
-              ))}
-            </div>
-
-            <div className="flex gap-4">
-              <Button
-                onClick={() => setCurrentStep('level')}
-                variant="secondary"
-                className="flex-1"
-              >
-                Back
-              </Button>
-              <Button
-                onClick={handleNext}
-                variant="accent"
-                className="flex-1"
-              >
-                Next
-              </Button>
+                <button
+                  onClick={handleNext}
+                  className={`flex-1 px-8 py-3 rounded bg-purple-700 text-white font-medium text-base transition-all duration-150
+                    ${!dailyGoal ? 'opacity-50 cursor-not-allowed' : 'hover:bg-purple-800'}`}
+                  disabled={!dailyGoal}
+                >
+                  Continue
+                  <span aria-hidden className="ml-2">→</span>
+                </button>
+              </div>
             </div>
           </div>
         )}
 
         {/* Finish Step */}
         {currentStep === 'finish' && (
-          <div className="text-center space-y-6">
-            <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-2xl font-bold text-gray-900">
-              You&apos;re all set!
-            </h2>
-            <p className="text-lg text-gray-600">
-              Let&apos;s meet your stories and start learning German the Minka way.
-            </p>
-            <Button
-              onClick={handleFinish}
-              size="lg"
-              variant="accent"
-              className="mt-6"
-              disabled={loading}
-            >
-              {loading ? 'Saving...' : 'Go to Dashboard'}
-            </Button>
+          <div className="flex flex-col items-center justify-center min-h-[60vh]">
+            <div className="w-full max-w-2xl flex flex-col items-center">
+              <div className="text-6xl mb-4">🎉</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-purple-800 mb-6 text-center">
+                You&apos;re all set!
+              </h2>
+              <p className="text-lg text-purple-700 mb-8 text-center">
+                Let&apos;s meet your stories and start learning German the Minka way.
+              </p>
+              <button
+                onClick={handleFinish}
+                className={`mt-6 px-8 py-3 rounded bg-purple-700 text-white font-medium text-base flex items-center gap-2 transition-all duration-150 mx-auto
+                  ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-purple-800'}`}
+                disabled={loading}
+              >
+                {loading ? 'Saving...' : 'Go to Dashboard'}
+              </button>
+            </div>
           </div>
         )}
       </div>

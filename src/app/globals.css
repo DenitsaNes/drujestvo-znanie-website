@@ -1,4 +1,11 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap');
 @import "tailwindcss";
+/* Utility for PT Serif font */
+.font-pt-serif {
+  font-family: 'PT Serif', serif !important;
+}
 
 :root {
   --background: #ffffff;

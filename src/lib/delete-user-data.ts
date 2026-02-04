@@ -23,6 +23,10 @@ const BATCH_SIZE = 500; // Firestore batch limit
  * - Legacy progressions
  */
 export async function deleteAllUserData(userId: string): Promise<void> {
+  if (!db) {
+    throw new Error('Database not initialized');
+  }
+
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
@@ -79,6 +83,9 @@ export async function deleteAllUserData(userId: string): Promise<void> {
  * Delete all flashcards and their subcollections (srs, reviews)
  */
 async function deleteFlashcards(userId: string): Promise<void> {
+  if (!db) {
+    throw new Error('Database not initialized');
+  }
   const flashcardsRef = collection(db, 'users', userId, 'flashcards');
   const flashcardsSnapshot = await getDocs(flashcardsRef);
 
@@ -104,6 +111,9 @@ async function deleteFlashcards(userId: string): Promise<void> {
  * Delete all documents in a collection (handles batching for large collections)
  */
 async function deleteCollection(collectionPath: string): Promise<void> {
+  if (!db) {
+    throw new Error('Database not initialized');
+  }
   const collectionRef = collection(db, collectionPath);
   const snapshot = await getDocs(collectionRef);
 

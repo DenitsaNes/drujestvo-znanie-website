@@ -3,13 +3,58 @@
  * Connects the algorithm to Prisma database
  */
 
-import { PrismaClient, Card as PrismaCard, Review as PrismaReview } from '@prisma/client';
+let PrismaClient: any;
+let prisma: any;
+
+try {
+  // Try to import Prisma - it may not be available in all environments
+  const prismaModule = require('@prisma/client');
+  PrismaClient = prismaModule.PrismaClient;
+  prisma = new PrismaClient({
+    log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+  });
+} catch (e) {
+  // Prisma not available - adapter functions will throw errors if called
+  console.warn('[SR Module] Prisma not available, database adapter will not work');
+  PrismaClient = null;
+  prisma = null;
+}
+
 import { Card, createCard, recordReview, calculateNextReview, getDueCards, resetLeech } from '../srAlgorithm';
 
-// Prisma client singleton to avoid multiple instances
-const prisma = new PrismaClient({
-  log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-});
+// Type definitions for Prisma models when Prisma is not available
+interface PrismaCard {
+  id: string;
+  front: string;
+  back: string;
+  createdAt: Date;
+  updatedAt: Date;
+  easeFactor: number;
+  intervalDays: number;
+  lastIntervalDays: number;
+  reps: number;
+  nextReview: Date;
+  totalReviews: number;
+  totalFails: number;
+  consecutiveFails: number;
+  isLeech: boolean;
+  leechNotes?: string | null;
+  tags?: string | null;
+  userId?: string | null;
+}
+
+interface PrismaReview {
+  id: string;
+  cardId: string;
+  userId?: string | null;
+  timestamp: Date;
+  wasCorrect: boolean;
+  quality?: number | null;
+  timeTaken?: number | null;
+  intervalDays?: number | null;
+  easeFactor?: number | null;
+  reps?: number | null;
+}
 
 /**
  * Convert Prisma Card to algorithm Card format

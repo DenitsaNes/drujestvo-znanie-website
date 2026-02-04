@@ -25,41 +25,45 @@ export default function StoryChaptersPage() {
 
   useEffect(() => {
     const unsubscribe = onAuthChange(async (firebaseUser) => {
-      if (!firebaseUser) {
-        router.push('/auth/login');
-        return;
-      }
+      let uid = firebaseUser ? firebaseUser.uid : null;
 
-    const loadStoryData = async (uid: string) => {
-      try {
-        const [storyData, chaptersData, progress, allChapterProgress] = await Promise.all([
-          getStoryById(storyId),
-          getStoryChapters(storyId),
-          getUserStoryProgress(uid, storyId),
-          getAllUserChapterProgress(uid),
-        ]);
+      const loadStoryData = async (uid: string | null) => {
+        try {
+          const [storyData, chaptersData] = await Promise.all([
+            getStoryById(storyId),
+            getStoryChapters(storyId),
+          ]);
 
-        if (!storyData) {
-          router.push('/stories');
-          return;
+          if (!storyData) {
+            router.push('/stories');
+            return;
+          }
+
+          setStory(storyData);
+          setChapters(chaptersData);
+
+          if (uid) {
+            const [progress, allChapterProgress] = await Promise.all([
+              getUserStoryProgress(uid, storyId),
+              getAllUserChapterProgress(uid),
+            ]);
+            setStoryProgress(progress);
+            // Filter chapter progress for this story's chapters
+            const chapterIds = chaptersData.map(ch => ch.id);
+            setChapterProgress(allChapterProgress.filter(cp => chapterIds.includes(cp.chapterId)));
+          } else {
+            setStoryProgress(null);
+            setChapterProgress([]);
+          }
+        } catch (error) {
+          console.error('Error loading story:', error);
+        } finally {
+          setLoading(false);
         }
+      };
 
-        setStory(storyData);
-        setChapters(chaptersData);
-        setStoryProgress(progress);
-        
-        // Filter chapter progress for this story's chapters
-        const chapterIds = chaptersData.map(ch => ch.id);
-        setChapterProgress(allChapterProgress.filter(cp => chapterIds.includes(cp.chapterId)));
-      } catch (error) {
-        console.error('Error loading story:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-      setUserId(firebaseUser.uid);
-      await loadStoryData(firebaseUser.uid);
+      setUserId(uid);
+      await loadStoryData(uid);
     });
 
     return () => unsubscribe();

@@ -12,30 +12,11 @@ export interface SRSVocabularyItem extends VocabularyItem {
 }
 
 export class SRSAlgorithm {
-  private static readonly MIN_INTERVAL = 1; // 1 day
-  private static readonly MAX_INTERVAL = 365; // 1 year
-  private static readonly INITIAL_EASE_FACTOR = 2.5;
-  private static readonly MIN_EASE_FACTOR = 1.3;
+  static MIN_EASE_FACTOR = 1.3;
+  static MAX_INTERVAL = 365;
 
   /**
-   * Convert basic vocabulary item to SRS item
-   */
-  static createSRSItem(item: VocabularyItem, difficulty: number = 1): SRSVocabularyItem {
-    return {
-      ...item,
-      id: `${item.german}-${item.english}`.toLowerCase().replace(/\s+/g, '-'),
-      interval: this.MIN_INTERVAL,
-      repetitions: 0,
-      easeFactor: this.INITIAL_EASE_FACTOR,
-      difficulty,
-      lastReviewed: undefined,
-      nextReview: new Date(), // Due immediately for new items
-    };
-  }
-
-  /**
-   * Calculate next review date based on performance
-   * Implements SM-2 algorithm with modifications
+   * Calculate the next review date for a vocabulary item based on its performance
    */
   static calculateNextReview(
     item: SRSVocabularyItem,
@@ -45,36 +26,18 @@ export class SRSAlgorithm {
 
     switch (performance) {
       case 'incorrect':
-        // Reset repetitions and interval for incorrect answers
         repetitions = 0;
-        interval = this.MIN_INTERVAL;
+        interval = 0;
         break;
 
       case 'hard':
-        // Reduce ease factor for hard answers
-        easeFactor = Math.max(
-          easeFactor - 0.2,
-          this.MIN_EASE_FACTOR
-        );
-        if (repetitions === 0) {
-          interval = this.MIN_INTERVAL;
-        } else if (repetitions === 1) {
-          interval = 6; // 6 days
-        } else {
-          interval = Math.round(interval * easeFactor);
-        }
+        easeFactor = Math.max(easeFactor - 0.2, this.MIN_EASE_FACTOR);
+        interval = Math.round(interval * easeFactor);
         repetitions++;
         break;
 
       case 'correct':
-        // Standard progression
-        if (repetitions === 0) {
-          interval = this.MIN_INTERVAL;
-        } else if (repetitions === 1) {
-          interval = 6; // 6 days
-        } else {
-          interval = Math.round(interval * easeFactor);
-        }
+        interval = Math.round(interval * easeFactor);
         repetitions++;
         break;
 
@@ -90,6 +53,11 @@ export class SRSAlgorithm {
         }
         repetitions++;
         break;
+    }
+
+    // Ensure interval is at least 1 day (except for incorrect, which is 0)
+    if (performance !== 'incorrect') {
+      interval = Math.max(interval, 1);
     }
 
     // Cap the interval

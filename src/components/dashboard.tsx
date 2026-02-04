@@ -80,7 +80,7 @@ export function Dashboard({
   // State for review forecast
   const [reviewForecast, setReviewForecast] = useState<{
     today: Array<{ hour: number; count: number; cumulative: number }>;
-    week: Array<{ date: Date; count: number; cumulative: number }>;
+    week: Array<{ date: Date; count: number; cumulative: number; hours: Array<{ hour: number; count: number; cumulative: number }> }>;
     cardsDueNow: number;
   } | null>(null);
 
@@ -95,11 +95,21 @@ export function Dashboard({
         // Convert Firestore Timestamps to Dates if needed
         const processedForecast = {
           ...forecast,
-          week: forecast.week.map(day => ({
-            ...day,
-            date: day.date instanceof Date ? day.date : (day.date?.toDate?.() || new Date(day.date)),
-            hours: day.hours || [],
-          })),
+          week: forecast.week.map(day => {
+            let date: Date;
+            if (day.date instanceof Date) {
+              date = day.date;
+            } else if (day.date && typeof day.date === 'object' && 'toDate' in day.date) {
+              date = (day.date as any).toDate();
+            } else {
+              date = new Date(day.date as any);
+            }
+            return {
+              ...day,
+              date,
+              hours: day.hours || [],
+            };
+          }),
         };
         setReviewForecast(processedForecast);
       } catch (error) {

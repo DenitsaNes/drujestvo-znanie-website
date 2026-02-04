@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
     console.log('[Flashcard Queue API] Max new cards:', preferences.maxNewCardsPerDay);
     
     // Try to get queue (will fail if no auth, but we'll handle it)
-    let queue;
+    let queue: any[] = [];
     try {
       queue = await getFlashcardQueue(userId, {
         storyId,

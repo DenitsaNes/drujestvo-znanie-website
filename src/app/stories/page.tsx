@@ -1,24 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { onAuthChange } from '@/lib/auth';
-
 export default function StoriesPage() {
-  const router = useRouter();
-  
-  useEffect(() => {
-    const unsubscribe = onAuthChange(async (firebaseUser) => {
-      if (!firebaseUser) {
-        router.push('/auth/login');
-        return;
-      }
-      // Redirect to dashboard
-      router.push('/dashboard');
-    });
-
-    return () => unsubscribe();
-  }, [router]);
-
-  return null;
+  // Render stories content here; no auth required
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">Stories</h1>
+        <p className="text-lg text-gray-700">Browse and read stories without signing in.</p>
+        {/* TODO: Render actual stories list/content here */}
+      </div>
+    </div>
+  );
 }

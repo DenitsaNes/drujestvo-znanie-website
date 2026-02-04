@@ -57,30 +57,30 @@ export default function ChapterReaderPage() {
 
   useEffect(() => {
     const unsubscribe = onAuthChange(async (firebaseUser) => {
-      if (!firebaseUser) {
-        router.push('/auth/login');
-        return;
-      }
+      let uid = firebaseUser ? firebaseUser.uid : null;
 
-      const loadChapterData = async (uid: string) => {
+      const loadChapterData = async (uid: string | null) => {
         try {
-          const [storyData, chaptersData, chapterData, blocksData, wordsData, progress, chProgress] = await Promise.all([
+          const [storyData, chaptersData, chapterData, blocksData, wordsData, dialogueLinesData, storyCharsData, globalCharsData, progress, chProgress] = await Promise.all([
             getStoryById(storyId),
             getStoryChapters(storyId),
             getChapterByNumber(storyId, chapterNumber),
             getChapterByNumber(storyId, chapterNumber).then(ch => ch ? getChapterBlocks(storyId, ch.id) : []),
             getChapterByNumber(storyId, chapterNumber).then(ch => ch ? getChapterWords(storyId, ch.id) : []),
+            getChapterByNumber(storyId, chapterNumber).then(ch => ch ? getChapterDialogueLines(storyId, ch.id) : []),
+            getStoryCharacters(storyId),
+            getAllCharacters(),
             getUserStoryProgress(uid, storyId),
             getChapterByNumber(storyId, chapterNumber).then(ch => ch ? getUserChapterProgress(uid, ch.id) : null),
           ]);
 
           // Proactively ensure all words in the chapter have translations
-          // This runs in the background and doesn't block the UI
           if (chapterData) {
-            // Extract text from blocks for pre-translation
-            const chapterText = blocksData.map(block => (block as any).textContent || (block as any).text || '').join(' ');
+            // Extract text from blocks and dialogue lines for pre-translation
+            const blockText = blocksData.map(block => (block as any).textContent || (block as any).text || '').join(' ');
+            const dialogueText = dialogueLinesData.map(line => line.text).join(' ');
+            const chapterText = `${blockText} ${dialogueText}`.trim();
             if (chapterText.trim()) {
-              // Run pre-translation in background (don't await - let it run async)
               fetch(`/api/stories/${storyId}/ensure-translations`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -90,8 +90,6 @@ export default function ChapterReaderPage() {
                   forceRefresh: false,
                 }),
               }).catch(error => {
-                // Silently fail - this is a background optimization, not critical
-                // Only log in development
                 if (process.env.NODE_ENV === 'development') {
                   console.debug('Background pre-translation failed (non-critical):', error);
                 }
@@ -109,6 +107,9 @@ export default function ChapterReaderPage() {
           setChapter(chapterData);
           setBlocks(blocksData);
           setWords(wordsData);
+          setDialogueLines(dialogueLinesData.sort((a, b) => a.orderIndex - b.orderIndex));
+          setStoryCharacters(storyCharsData);
+          setGlobalCharacters(globalCharsData);
           setStoryProgress(progress);
           setChapterProgress(chProgress);
           
@@ -116,58 +117,59 @@ export default function ChapterReaderPage() {
           if (uid) {
             const existingFlashcards = new Set<string>();
             for (const word of wordsData) {
-              // Check by storyWordId (word.id is the story word ID)
               const exists = await flashcardExists(uid, undefined, word.id);
               if (exists) {
                 existingFlashcards.add(word.id);
               }
             }
             setAddedToFlashcards(existingFlashcards);
-          }
-          
 
+            // Mark chapter as READING if not started
+            if (!chProgress) {
+              const newProgress: UserChapterProgress = {
+                id: chapterData.id,
+                userId: uid,
+                chapterId: chapterData.id,
+                status: 'READING',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+              };
+              await updateUserChapterProgress(newProgress);
+              setChapterProgress(newProgress);
+            } else if (chProgress.status === 'NOT_STARTED') {
+              const updatedProgress = { ...chProgress, status: 'READING' as const };
+              await updateUserChapterProgress(updatedProgress);
+              setChapterProgress(updatedProgress);
+            }
 
-          // Mark chapter as READING if not started
-          if (!chProgress) {
-            const newProgress: UserChapterProgress = {
-              id: chapterData.id,
-              userId: uid,
-              chapterId: chapterData.id,
-              status: 'READING',
-              createdAt: new Date(),
-              updatedAt: new Date(),
-            };
-            await updateUserChapterProgress(newProgress);
-            setChapterProgress(newProgress);
-          } else if (chProgress.status === 'NOT_STARTED') {
-            const updatedProgress = { ...chProgress, status: 'READING' as const };
-            await updateUserChapterProgress(updatedProgress);
-            setChapterProgress(updatedProgress);
-          }
+            // Update story progress to current chapter
+            if (!progress) {
+              const newStoryProgress: UserStoryProgress = {
+                id: `${uid}_${storyId}`,
+                userId: uid,
+                storyId: storyId,
+                currentChapterNumber: chapterNumber,
+                completed: false,
+                lastAccessedAt: new Date(),
+                createdAt: new Date(),
+                updatedAt: new Date(),
+              };
+              await updateUserStoryProgress(newStoryProgress);
+              setStoryProgress(newStoryProgress);
+            } else if (!progress.currentChapterNumber || progress.currentChapterNumber < chapterNumber) {
+              const updatedProgress = { ...progress, currentChapterNumber: chapterNumber, lastAccessedAt: new Date() };
+              await updateUserStoryProgress(updatedProgress);
+              setStoryProgress(updatedProgress);
+            }
 
-          // Update story progress to current chapter
-          if (!progress) {
-            const newStoryProgress: UserStoryProgress = {
-              id: `${uid}_${storyId}`,
-              userId: uid,
-              storyId: storyId,
-              currentChapterNumber: chapterNumber,
-              completed: false,
-              lastAccessedAt: new Date(),
-              createdAt: new Date(),
-              updatedAt: new Date(),
-            };
-            await updateUserStoryProgress(newStoryProgress);
-            setStoryProgress(newStoryProgress);
-          } else if (!progress.currentChapterNumber || progress.currentChapterNumber < chapterNumber) {
-            const updatedProgress = { ...progress, currentChapterNumber: chapterNumber, lastAccessedAt: new Date() };
-            await updateUserStoryProgress(updatedProgress);
-            setStoryProgress(updatedProgress);
-          }
-
-          // Check if chapter is completed
-          if (chProgress?.status === 'COMPLETED') {
-            setChapterCompleted(true);
+            // Check if chapter is completed
+            if (chProgress?.status === 'COMPLETED') {
+              setChapterCompleted(true);
+            }
+          } else {
+            setStoryProgress(null);
+            setChapterProgress(null);
+            setAddedToFlashcards(new Set());
           }
         } catch (error) {
           console.error('Error loading chapter:', error);
@@ -175,9 +177,9 @@ export default function ChapterReaderPage() {
           setLoading(false);
         }
       };
-      
-      setUserId(firebaseUser.uid);
-      await loadChapterData(firebaseUser.uid);
+
+      setUserId(uid);
+      await loadChapterData(uid);
     });
 
     return () => unsubscribe();

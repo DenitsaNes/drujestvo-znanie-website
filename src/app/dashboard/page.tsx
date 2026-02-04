@@ -10,7 +10,9 @@ import { getAllUserStoryProgress } from '@/lib/db/user-progress';
 import { getAllStories } from '@/lib/db/stories';
 import { User } from '@/types/user';
 import { Story } from '@/types/story';
-import LearningDashboard from '@/components/LearningDashboard';
+        setUser(null);
+        setLoading(false);
+        return;
 import { Button } from '@/components/ui/button';
 
 export default function DashboardPage() {
@@ -75,7 +77,26 @@ export default function DashboardPage() {
       } finally {
         setLoading(false);
       }
-    });
+    // Guest dashboard
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 p-8">
+        <div className="max-w-xl w-full bg-white rounded-2xl shadow-lg p-10 text-center">
+          <h1 className="text-3xl font-bold mb-4 text-purple-800">Welcome to Minka!</h1>
+          <p className="text-lg text-gray-700 mb-6">Browse stories, preview chapters, and explore the platform. Sign up or log in to track your progress, save flashcards, and unlock all features.</p>
+          <div className="flex gap-4 justify-center mb-8">
+            <Link href="/auth/signup">
+              <Button className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-full font-semibold">Sign Up</Button>
+            </Link>
+            <Link href="/auth/login">
+              <Button variant="outline" className="border-purple-500 text-purple-700 px-6 py-3 rounded-full font-semibold">Log In</Button>
+            </Link>
+          </div>
+          <Link href="/stories">
+            <Button variant="secondary" className="w-full mt-2">Browse Stories</Button>
+          </Link>
+        </div>
+      </div>
+    );
 
     return () => unsubscribe();
   }, [router]);

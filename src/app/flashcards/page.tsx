@@ -405,7 +405,7 @@ export default function FlashcardsPage() {
         const auth = getAuth();
         
         // Wait for auth state to be determined
-        const currentUser = await new Promise((resolve) => {
+        const currentUser = await new Promise<any | null>((resolve) => {
           const unsubscribe = onAuthStateChanged(auth, (user) => {
             unsubscribe();
             resolve(user);
@@ -447,6 +447,12 @@ export default function FlashcardsPage() {
                     const { getDefaultSRS } = await import('@/lib/srs-scheduler');
                     const { doc, setDoc, Timestamp } = await import('firebase/firestore');
                     const { db } = await import('@/lib/firebase');
+                    
+                    if (!db) {
+                      console.warn('Database not initialized, skipping SRS creation');
+                      continue;
+                    }
+                    
                     const defaultSRS = getDefaultSRS();
                     const srsRef = doc(db, 'users', auth.currentUser!.uid, 'flashcards', fc.id, 'srs', 'data');
                     await setDoc(srsRef, {

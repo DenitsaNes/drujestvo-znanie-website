@@ -11,10 +11,10 @@ import { auth } from '@/lib/firebase';
  */
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const storyId = params.id;
+    const { id: storyId } = await params;
     if (!storyId) {
       return NextResponse.json(
         { error: 'Story ID is required' },
@@ -66,10 +66,10 @@ export async function POST(
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const storyId = params.id;
+    const { id: storyId } = await params;
     if (!storyId) {
       return NextResponse.json(
         { error: 'Story ID is required' },
@@ -80,6 +80,13 @@ export async function GET(
     // Get tokens from Firestore
     const { collection, query, where, getDocs } = await import('firebase/firestore');
     const { db } = await import('@/lib/firebase');
+    
+    if (!db) {
+      return NextResponse.json(
+        { error: 'Database not initialized' },
+        { status: 500 }
+      );
+    }
     
     const tokensRef = collection(db, 'stories', storyId, 'tokens');
     const snapshot = await getDocs(tokensRef);
