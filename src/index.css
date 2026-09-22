@@ -98,20 +98,6 @@ img {
   margin-bottom: var(--spacing-md);
 }
 
-/* Top bar */
-.top-bar {
-  background-color: var(--color-utility-bar);
-  color: var(--color-utility-text);
-  padding: var(--spacing-xs) 0;
-  font-size: 0.875rem;
-}
-
-.top-bar__inner {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
 /* Header */
 .site-header {
   padding: var(--spacing-md) 0;
