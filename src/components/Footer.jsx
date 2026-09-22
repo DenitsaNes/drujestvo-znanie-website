@@ -9,7 +9,6 @@ function Footer() {
         <div>
           <h4>Дружество "Знание"</h4>
           <p>Haskovo, България</p>
-          <p>ЕИК: 000907978</p>
         </div>
         <div>
           <h4>Бързи връзки</h4>
@@ -19,9 +18,6 @@ function Footer() {
             </li>
             <li>
               <Link to="/upravitelen-savet">Управителен съвет</Link>
-            </li>
-            <li>
-              <Link to="/deynost">Дейност</Link>
             </li>
           </ul>
         </div>
