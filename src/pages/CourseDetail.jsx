@@ -95,8 +95,7 @@ function CourseDetail() {
                 Основание: <strong>„{title} — {date}"</strong>
               </p>
               <p className="course-bank__note">
-                Можеш да заплатиш и на място в офиса ни в Хасково, или да се свържеш с нас за
-                детайли.
+                След записване ще се свържем с теб с конкретни инструкции за плащане.
               </p>
             </div>
           </div>
@@ -124,7 +123,6 @@ function CourseDetail() {
               <ul className="course-detail__list">
                 <li>4 часа онлайн обучение на живо с експерт</li>
                 <li>Работни материали — презентация, чеклист и шаблон</li>
-                <li>Запис на семинара за повторно гледане</li>
                 <li>Сертификат за участие</li>
                 <li>Q&A сесия на живо</li>
                 <li>Достъп до затворена група за въпроси след обучението</li>
@@ -132,14 +130,7 @@ function CourseDetail() {
             </div>
           </div>
 
-          <div className="course-pitch__trust">
-            <div className="trust-card">
-              <h3>Гаранция</h3>
-              <p>
-                Ако не намериш стойността в първите 30 минути, връщаме парите — без
-                въпроси.
-              </p>
-            </div>
+          <div className="course-pitch__trust course-pitch__trust--two">
             <div className="trust-card">
               <h3>Намаления</h3>
               <p>

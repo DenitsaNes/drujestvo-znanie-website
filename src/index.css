@@ -1161,6 +1161,10 @@ img {
   gap: var(--spacing-md);
 }
 
+.course-pitch__trust--two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .trust-card {
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
@@ -1204,7 +1208,8 @@ img {
   }
 
   .course-pitch__grid,
-  .course-pitch__trust {
+  .course-pitch__trust,
+  .course-pitch__trust--two {
     grid-template-columns: 1fr;
   }
 }
