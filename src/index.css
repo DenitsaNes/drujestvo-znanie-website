@@ -393,6 +393,12 @@ img {
   font-size: 0.95rem;
 }
 
+.course-card__price {
+  color: var(--color-text);
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-sm);
+}
+
 /* Info cards and rows */
 .info-card {
   background-color: var(--color-background-soft);

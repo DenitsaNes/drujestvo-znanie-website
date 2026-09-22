@@ -7,6 +7,7 @@ export const courses = [
     note: 'Промени в данъчното законодателство',
     fullPrice: 120,
     earlyPrice: 90,
+    stripePriceId: '',
   },
   {
     id: 'dds',
@@ -16,6 +17,7 @@ export const courses = [
     note: 'Промени в данъчното законодателство',
     fullPrice: 120,
     earlyPrice: 90,
+    stripePriceId: '',
   },
   {
     id: 'korp-danak',
@@ -25,6 +27,7 @@ export const courses = [
     note: 'Промени в данъчното законодателство',
     fullPrice: 150,
     earlyPrice: 110,
+    stripePriceId: '',
   },
   {
     id: 'trudov-kodeks',
@@ -34,6 +37,7 @@ export const courses = [
     note: 'Промени в трудовото законодателство',
     fullPrice: 120,
     earlyPrice: 90,
+    stripePriceId: '',
   },
 ];
 
