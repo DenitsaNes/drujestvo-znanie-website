@@ -2,6 +2,8 @@ import { useState, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { courses, getCourseById } from '../data/courses';
 
+const FORM_NAME = 'course-registration';
+
 function CourseRegistration() {
   const [searchParams] = useSearchParams();
   const initialCourseId = searchParams.get('course') || courses[0].id;
@@ -15,6 +17,7 @@ function CourseRegistration() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const selectedCourse = useMemo(
     () => getCourseById(formData.courseId) || courses[0],
@@ -35,7 +38,23 @@ function CourseRegistration() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+
+    const payload = new FormData(event.target);
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(payload).toString(),
+    })
+      .then(() => setSubmitted(true))
+      .catch((error) => {
+        // eslint-disable-next-line no-alert
+        alert('Възникна грешка при изпращането. Моля, опитай отново.');
+        // eslint-disable-next-line no-console
+        console.error(error);
+      })
+      .finally(() => setSubmitting(false));
   };
 
   if (submitted) {
@@ -119,7 +138,18 @@ function CourseRegistration() {
           <p className="registration-note">{selectedCourse.note}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="registration-form">
+        <form
+          name={FORM_NAME}
+          method="POST"
+          data-netlify="true"
+          onSubmit={handleSubmit}
+          className="registration-form"
+        >
+          <input type="hidden" name="form-name" value={FORM_NAME} />
+          <input type="hidden" name="courseTitle" value={selectedCourse.title} />
+          <input type="hidden" name="courseDate" value={selectedCourse.date} />
+          <input type="hidden" name="coursePrice" value={`${selectedCourse.fullPrice} €`} />
+
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="name">Име и фамилия</label>
@@ -180,8 +210,12 @@ function CourseRegistration() {
             <span className="price-value">{selectedCourse.fullPrice} €</span>
           </div>
 
-          <button type="submit" className="button button--large button--submit">
-            Изпрати заявление
+          <button
+            type="submit"
+            className="button button--large button--submit"
+            disabled={submitting}
+          >
+            {submitting ? 'Изпраща се...' : 'Изпрати заявление'}
           </button>
         </form>
       </div>

@@ -8,6 +8,18 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Hidden form for Netlify Forms detection (React form is rendered client-side) -->
+    <form name="course-registration" method="POST" data-netlify="true" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="notes"></textarea>
+      <input type="text" name="courseTitle" />
+      <input type="text" name="courseDate" />
+      <input type="text" name="coursePrice" />
+    </form>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
