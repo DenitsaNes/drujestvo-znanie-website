@@ -55,7 +55,8 @@ function CourseRegistration() {
             Цена: <strong>{selectedCourse.fullPrice} €</strong>
           </p>
           <p className="success-info">
-            Ще се свържем с теб на имейл или телефон за потвърждение.
+            Ще се свържем с теб на имейл или телефон с инструкции за плащане по банков
+            път. Записването става финално след получено плащане.
           </p>
           <Link to="/" className="button">
             Назад към началото
