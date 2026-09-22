@@ -285,6 +285,11 @@ img {
   padding: var(--spacing-md) var(--spacing-lg);
 }
 
+.button--huge {
+  font-size: 1.5rem;
+  padding: var(--spacing-md) var(--spacing-xl);
+}
+
 /* Quick cards */
 .quick-cards {
   display: grid;

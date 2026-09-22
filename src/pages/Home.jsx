@@ -16,7 +16,7 @@ function Home() {
           <p className="placeholder-note">
              Неправителствена организация в гр. Хасково, България
           </p>
-          <Link to="/zapisi" className="button">
+          <Link to="/zapisi" className="button button--huge">
             Запиши се
           </Link>
         </div>
