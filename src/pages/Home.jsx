@@ -16,34 +16,26 @@ function Home() {
           <p className="placeholder-note">
              Неправителствена организация в гр. Хасково, България
           </p>
-          <Link to="/za-nas" className="button">
-            Научете повече
+          <Link to="/zapisi" className="button">
+            Запиши се
           </Link>
         </div>
       </section>
 
       <section className="section section--quick-cards">
         <div className="container">
-          <div className="quick-cards">
+          <div className="quick-cards quick-cards--two">
+            <QuickCard
+              to="/zapisi"
+              title="Курсове"
+              text="Практически онлайн семинари по данъчно облагане, финанси и AI."
+              cta="Запиши се"
+            />
             <QuickCard
               to="/za-nas"
               title="За нас"
-              text="Регистрация, правна форма и адрес."
-            />
-            <QuickCard
-              to="/upravitelen-savet"
-              title="Управителен съвет"
-              text="Членове на управителния съвет."
-            />
-            <QuickCard
-              to="/deynost"
-              title="Дейност"
-              text="Програми и инициативи."
-            />
-            <QuickCard
-              to="/kontakti"
-              title="Контакти"
-              text="Форма за връзка и адрес."
+              text="История, мисия и управителен съвет на Дружество „Знание“."
+              cta="Запиши се"
             />
           </div>
         </div>

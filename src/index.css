@@ -329,6 +329,21 @@ img {
 
 .quick-card p {
   color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+}
+
+.quick-card__cta {
+  margin-top: auto;
+  color: var(--color-lilac-dark);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.quick-cards--two {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Course cards */
@@ -647,6 +662,10 @@ img {
   .footer__grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
+  }
+
+  .quick-cards--two {
+    grid-template-columns: 1fr;
   }
 }
 
