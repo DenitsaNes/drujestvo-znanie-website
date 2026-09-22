@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 const navItems = [
   { to: '/', label: 'Начало' },
   { to: '/upravitelen-savet', label: 'Управителен съвет' },
-  { to: '/deynost', label: 'Дейност' },
   { to: '/zapisi', label: 'Записване' },
   { to: '/za-nas', label: 'За нас' },
   { to: '/kontakti', label: 'Контакти' },
