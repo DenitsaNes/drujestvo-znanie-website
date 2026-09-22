@@ -5,8 +5,8 @@ export const courses = [
     description: 'Данъци върху доходите на физически лица.',
     date: 'Януари 2027',
     note: 'Промени в данъчното законодателство',
-    fullPrice: 120,
-    earlyPrice: 90,
+    fullPrice: 100,
+    earlyPrice: 100,
     stripePriceId: '',
   },
   {
@@ -15,8 +15,8 @@ export const courses = [
     description: 'Данък върху добавената стойност за бизнеса.',
     date: 'Януари 2027',
     note: 'Промени в данъчното законодателство',
-    fullPrice: 120,
-    earlyPrice: 90,
+    fullPrice: 100,
+    earlyPrice: 100,
     stripePriceId: '',
   },
   {
@@ -25,8 +25,8 @@ export const courses = [
     description: 'Данъчно облагане на юридически лица.',
     date: 'Януари 2027',
     note: 'Промени в данъчното законодателство',
-    fullPrice: 150,
-    earlyPrice: 110,
+    fullPrice: 100,
+    earlyPrice: 100,
     stripePriceId: '',
   },
   {
@@ -35,8 +35,8 @@ export const courses = [
     description: 'Трудово право и задължения на работодателите.',
     date: 'Януари 2027',
     note: 'Промени в трудовото законодателство',
-    fullPrice: 120,
-    earlyPrice: 90,
+    fullPrice: 100,
+    earlyPrice: 100,
     stripePriceId: '',
   },
 ];

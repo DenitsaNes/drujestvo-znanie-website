@@ -6,6 +6,7 @@ import Board from './pages/Board';
 import Activities from './pages/Activities';
 import Contacts from './pages/Contacts';
 import CourseRegistration from './pages/CourseRegistration';
+import CourseDetail from './pages/CourseDetail';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="za-nas" element={<About />} />
           <Route path="upravitelen-savet" element={<Board />} />
           <Route path="deynost" element={<Activities />} />
+          <Route path="deynost/:courseId" element={<CourseDetail />} />
           <Route path="kontakti" element={<Contacts />} />
           <Route path="zapisi" element={<CourseRegistration />} />
         </Route>
