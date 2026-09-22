@@ -1367,3 +1367,111 @@ img {
     grid-template-columns: 1fr;
   }
 }
+
+/* Registration page course selection */
+.registration-choose-title {
+  margin-bottom: var(--spacing-md);
+}
+
+.registration-courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.registration-course {
+  background-color: var(--color-background);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.registration-course:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-lilac);
+}
+
+.registration-course--selected {
+  border-color: var(--color-lilac-dark);
+  box-shadow: 0 0 0 4px var(--color-lilac-light);
+}
+
+.registration-course__image {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--color-lilac-soft), var(--color-background));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  text-align: center;
+}
+
+.registration-course__image span {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-lilac-dark);
+}
+
+.registration-course__body {
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.registration-course__price {
+  font-size: 1.1rem;
+  color: var(--color-lilac-dark);
+}
+
+.registration-course__title {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.registration-course__description {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.registration-course__details {
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.registration-course__details li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.15rem;
+}
+
+.registration-course__details li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-lilac-dark);
+}
+
+.registration-course__cta {
+  margin-top: auto;
+  display: inline-block;
+  text-align: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  background-color: var(--color-lilac-soft);
+  color: var(--color-lilac-dark);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.registration-course--selected .registration-course__cta {
+  background-color: var(--color-lilac);
+  color: white;
+}

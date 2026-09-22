@@ -11,7 +11,6 @@ function CourseRegistration() {
     email: '',
     phone: '',
     courseId: initialCourseId,
-    earlyRegistration: false,
     notes: '',
   });
 
@@ -22,16 +21,16 @@ function CourseRegistration() {
     [formData.courseId]
   );
 
-  const currentPrice = formData.earlyRegistration
-    ? selectedCourse.earlyPrice
-    : selectedCourse.fullPrice;
-
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
     setFormData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
+  };
+
+  const selectCourse = (courseId) => {
+    setFormData((prev) => ({ ...prev, courseId }));
   };
 
   const handleSubmit = (event) => {
@@ -53,10 +52,7 @@ function CourseRegistration() {
             Дата: <strong>{selectedCourse.date}</strong>
           </p>
           <p>
-            Цена: <strong>{currentPrice} лв.</strong>
-            {formData.earlyRegistration && (
-              <span className="price-note"> (ранно записване)</span>
-            )}
+            Цена: <strong>{selectedCourse.fullPrice} €</strong>
           </p>
           <p className="success-info">
             Ще се свържем с теб на имейл или телефон за потвърждение.
@@ -73,6 +69,47 @@ function CourseRegistration() {
     <section className="section registration-page">
       <div className="container">
         <h1 className="page-title">Записване за курс</h1>
+
+        <h2 className="section-title registration-choose-title">Изберете семинар</h2>
+        <div className="registration-courses">
+          {courses.map((course) => (
+            <div
+              key={course.id}
+              className={`registration-course ${
+                formData.courseId === course.id ? 'registration-course--selected' : ''
+              }`}
+              onClick={() => selectCourse(course.id)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  selectCourse(course.id);
+                }
+              }}
+              aria-pressed={formData.courseId === course.id}
+            >
+              <div className="registration-course__image">
+                <span>{course.title}</span>
+              </div>
+              <div className="registration-course__body">
+                <p className="registration-course__price">
+                  <strong>{course.fullPrice} €</strong>
+                </p>
+                <h3 className="registration-course__title">Онлайн обучение: {course.title}</h3>
+                <p className="registration-course__description">{course.description}</p>
+                <ul className="registration-course__details">
+                  <li>{course.date}</li>
+                  <li>Онлайн: през Zoom</li>
+                  <li>4 часа с експерт</li>
+                </ul>
+                <span className="registration-course__cta">
+                  {formData.courseId === course.id ? 'Избран ✓' : 'Избери'}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className="registration-summary">
           <span className="date-badge">{selectedCourse.date}</span>
@@ -125,58 +162,21 @@ function CourseRegistration() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="courseId">Избран курс</label>
-              <select
-                id="courseId"
-                name="courseId"
-                value={formData.courseId}
+              <label htmlFor="notes">Бележки</label>
+              <textarea
+                id="notes"
+                name="notes"
+                rows="3"
+                value={formData.notes}
                 onChange={handleChange}
-                required
-              >
-                {courses.map((course) => (
-                  <option key={course.id} value={course.id}>
-                    {course.title} — {course.date}
-                  </option>
-                ))}
-              </select>
+                placeholder="Допълнителна информация (по желание)"
+              ></textarea>
             </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="notes">Бележки</label>
-            <textarea
-              id="notes"
-              name="notes"
-              rows="3"
-              value={formData.notes}
-              onChange={handleChange}
-              placeholder="Допълнителна информация (по желание)"
-            ></textarea>
-          </div>
-
-          <div className="early-bird-box">
-            <label className="early-bird-toggle">
-              <input
-                type="checkbox"
-                name="earlyRegistration"
-                checked={formData.earlyRegistration}
-                onChange={handleChange}
-              />
-              <span className="toggle-label">Ранно записване</span>
-            </label>
-            <p className="early-bird-info">
-              Включи ранно записване и получи отстъпка.
-            </p>
           </div>
 
           <div className="price-summary">
             <span className="price-label">Крайна цена:</span>
-            <span className="price-value">{currentPrice} лв.</span>
-            {formData.earlyRegistration && (
-              <span className="price-original">
-                {selectedCourse.fullPrice} лв.
-              </span>
-            )}
+            <span className="price-value">{selectedCourse.fullPrice} €</span>
           </div>
 
           <button type="submit" className="button button--large button--submit">
