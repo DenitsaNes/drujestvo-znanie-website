@@ -775,6 +775,10 @@ img {
   margin-top: 0.2rem;
 }
 
+.form-honeypot {
+  display: none;
+}
+
 .early-bird-box {
   background-color: var(--color-lilac-soft);
   border: 1px solid var(--color-lilac-light);

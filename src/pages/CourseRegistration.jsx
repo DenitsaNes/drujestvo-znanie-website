@@ -3,7 +3,6 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { courses, getCourseById } from '../data/courses';
 
 const FORM_NAME = 'course-registration';
-const ALLOWED_EMAIL_DOMAINS = ['@gmail.com', '@abv.bg', '@yahoo.com'];
 
 function getGroupPrice(quantity, basePrice) {
   if (quantity >= 10) return { perPerson: 60, note: 'Корпоративен пакет 10+' };
@@ -59,8 +58,6 @@ function CourseRegistration() {
       newErrors.email = 'Моля, въведете имейл.';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = 'Моля, въведете валиден имейл.';
-    } else if (!ALLOWED_EMAIL_DOMAINS.some((domain) => email.endsWith(domain))) {
-      newErrors.email = 'Моля, използвайте имейл от gmail.com, abv.bg или yahoo.com.';
     }
 
     const phoneDigits = data.phone.replace(/\D/g, '');
@@ -227,10 +224,17 @@ function CourseRegistration() {
           name={FORM_NAME}
           method="POST"
           data-netlify="true"
+          data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
           className="registration-form"
         >
           <input type="hidden" name="form-name" value={FORM_NAME} />
+          <p className="form-honeypot">
+            <label>
+              Не попълвайте това поле, ако сте човек:
+              <input name="bot-field" tabIndex={-1} autoComplete="off" />
+            </label>
+          </p>
           <input type="hidden" name="courseTitle" value={selectedCourse.title} />
           <input type="hidden" name="courseDate" value={selectedCourse.date} />
           <input type="hidden" name="pricePerPerson" value={`${groupPrice.perPerson} €`} />
