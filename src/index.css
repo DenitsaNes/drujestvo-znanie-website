@@ -2095,6 +2095,37 @@ img {
   line-height: 1.7;
 }
 
+/* Legal pages */
+.legal-page {
+  max-width: 800px;
+}
+
+.legal-page h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-lilac-dark);
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+}
+
+.legal-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.legal-list {
+  list-style: disc;
+  margin-left: 1.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.legal-list li {
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.6;
+}
+
 @media (max-width: 768px) {
   .seminar-sticky-bar__info {
     font-size: 0.8rem;

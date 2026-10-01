@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const BONUSES = [
   {
@@ -84,7 +85,13 @@ const STICKY_CTA = '/zapisi?course=trudov-kodeks#registration-form';
 
 function SeminarOct28() {
   return (
-    <article className="seminar-landing">
+    <>
+      <SEO
+        title="Семинар: Трудов стаж и прозрачност на заплащането"
+        description="Практически семинар с Теодора Дичева на 28 октомври 2026 в Хасково. Подгответе организацията си за промените в трудовото законодателство през 2027."
+        pathname="/seminar-trudovo-zakonodatelstvo-28-oktomvri"
+      />
+      <article className="seminar-landing">
       <div className="seminar-sticky-bar">
         <div className="container">
           <span className="seminar-sticky-bar__info">
@@ -398,7 +405,8 @@ function SeminarOct28() {
           </div>
         </div>
       </section>
-    </article>
+      </article>
+    </>
   );
 }
 

@@ -1,9 +1,16 @@
 import { association } from '../data/association';
 import InfoRow from '../components/InfoRow';
+import SEO from '../components/SEO';
 
 function About() {
   return (
-    <section className="section">
+    <>
+      <SEO
+        title="За нас"
+        description="Научете повече за Дружество „Знание“ в Хасково — неправителствена организация за образование и професионално развитие."
+        pathname="/za-nas"
+      />
+      <section className="section">
       <div className="container">
         <h1 className="page-title">За нас</h1>
 
@@ -19,6 +26,7 @@ function About() {
 
       </div>
     </section>
+    </>
   );
 }
 

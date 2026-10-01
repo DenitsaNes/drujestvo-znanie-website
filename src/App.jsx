@@ -9,6 +9,7 @@ import Contacts from './pages/Contacts';
 import CourseRegistration from './pages/CourseRegistration';
 import CourseDetail from './pages/CourseDetail';
 import SeminarOct28 from './pages/SeminarOct28';
+import Privacy from './pages/Privacy';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="kontakti" element={<Contacts />} />
           <Route path="zapisi" element={<CourseRegistration />} />
           <Route path="seminar-trudovo-zakonodatelstvo-28-oktomvri" element={<SeminarOct28 />} />
+          <Route path="politika-za-poveritelnost" element={<Privacy />} />
         </Route>
       </Routes>
     </BrowserRouter>

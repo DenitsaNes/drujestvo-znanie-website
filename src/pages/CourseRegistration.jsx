@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { courses, getCourseById } from '../data/courses';
 
 const FORM_NAME = 'course-registration';
@@ -115,7 +116,13 @@ function CourseRegistration() {
 
   if (submitted) {
     return (
-      <section className="section registration-page">
+      <>
+        <SEO
+          title="Успешно записване"
+          description="Благодарим за записването. Ще се свържем с вас с инструкции за плащане."
+          pathname="/zapisi"
+        />
+        <section className="section registration-page">
         <div className="container registration-success">
           <div className="success-icon">✓</div>
           <h1 className="page-title">Успешно записване</h1>
@@ -141,11 +148,18 @@ function CourseRegistration() {
           </Link>
         </div>
       </section>
-    );
+    </>
+  );
   }
 
   return (
-    <section className="section registration-page">
+    <>
+      <SEO
+        title="Записване за семинар"
+        description="Запишете се за практически семинар на Дружество „Знание“. Онлайн обучения по данъчно и трудово законодателство."
+        pathname="/zapisi"
+      />
+      <section className="section registration-page">
       <div className="container">
         <h1 className="page-title">Записване за курс</h1>
 
@@ -357,6 +371,7 @@ function CourseRegistration() {
         </form>
       </div>
     </section>
+    </>
   );
 }
 

@@ -1,4 +1,5 @@
 import { association } from '../data/association';
+import SEO from '../components/SEO';
 
 function Contacts() {
   const handleSubmit = (event) => {
@@ -9,7 +10,13 @@ function Contacts() {
   };
 
   return (
-    <section className="section">
+    <>
+      <SEO
+        title="Контакти"
+        description="Свържете се с Дружество „Знание“ в Хасково — адрес, телефон, имейл и форма за съобщения."
+        pathname="/kontakti"
+      />
+      <section className="section">
       <div className="container">
         <h1 className="page-title">Контакти</h1>
 
@@ -67,6 +74,7 @@ function Contacts() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 

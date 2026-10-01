@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
 import QuickCard from '../components/QuickCard';
 import CourseCard from '../components/CourseCard';
+import SEO from '../components/SEO';
 import { courses } from '../data/courses';
 
 function Home() {
   return (
     <>
+      <SEO
+        description="Дружество „Знание“ — неправителствена организация в Хасково. Практически семинари по данъчно и трудово законодателство с утвърдени експерти."
+        pathname="/"
+      />
       <section className="hero">
         <div className="container">
           <h1 className="hero__title">Дружество "Знание"</h1>

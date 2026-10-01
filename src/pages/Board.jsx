@@ -1,8 +1,15 @@
 import { association } from '../data/association';
+import SEO from '../components/SEO';
 
 function Board() {
   return (
-    <section className="section">
+    <>
+      <SEO
+        title="Управителен съвет"
+        description="Членове на Управителния съвет на Дружество „Знание“, гр. Хасково."
+        pathname="/upravitelen-savet"
+      />
+      <section className="section">
       <div className="container">
         <h1 className="page-title">Управителен съвет</h1>
         <ul className="board-list">
@@ -14,6 +21,7 @@ function Board() {
         </ul>
       </div>
     </section>
+    </>
   );
 }
 

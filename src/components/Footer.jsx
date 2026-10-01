@@ -27,6 +27,9 @@ function Footer() {
             <li>
               <Link to="/kontakti">Контакти</Link>
             </li>
+            <li>
+              <Link to="/politika-za-poveritelnost">Политика за поверителност</Link>
+            </li>
           </ul>
         </div>
         <div>
