@@ -16,8 +16,8 @@ function Home() {
           <p className="placeholder-note">
              Неправителствена организация в гр. Хасково, България
           </p>
-          <Link to="/zapisi" className="button button--huge">
-            Запиши се
+          <Link to="/zapisi?course=trudov-kodeks#registration-form" className="button button--huge">
+            Запиши се за семинара
           </Link>
         </div>
       </section>
@@ -26,9 +26,9 @@ function Home() {
         <div className="container">
           <div className="quick-cards quick-cards--two">
             <QuickCard
-              to="/zapisi"
-              title="Курсове"
-              text="Практически онлайн семинари по данъчно облагане."
+              to="/zapisi?course=trudov-kodeks#registration-form"
+              title="28 октомври"
+              text="Семинар с Теодора Дичева: трудов стаж и прозрачност на заплащането."
               cta="Запиши се"
             />
             <QuickCard
@@ -38,6 +38,29 @@ function Home() {
               cta="Научи повече"
             />
           </div>
+        </div>
+      </section>
+
+      <section className="section section--featured">
+        <div className="container featured-seminar">
+          <div className="featured-seminar__badge">Предстоящ семинар</div>
+          <h2 className="featured-seminar__title">
+            Новите правила за трудовия стаж и прозрачността на заплащането
+          </h2>
+          <p className="featured-seminar__meta">
+            28 октомври 2026 г. • Хасково • с Теодора Дичева
+          </p>
+          <p className="featured-seminar__text">
+            Практически семинар за работодатели, HR специалисти, ТРЗ експерти,
+            счетоводители и мениджъри. Подгответе организацията си за промените през
+            2027 г.
+          </p>
+          <Link
+            to="/zapisi?course=trudov-kodeks#registration-form"
+            className="button button--large"
+          >
+            Запиши се за семинара
+          </Link>
         </div>
       </section>
 

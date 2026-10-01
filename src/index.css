@@ -2032,6 +2032,53 @@ img {
   color: white;
 }
 
+/* Featured seminar on home page */
+.featured-seminar {
+  background: linear-gradient(135deg, var(--color-lilac-soft), var(--color-background));
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xl);
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.featured-seminar__badge {
+  display: inline-block;
+  background-color: var(--color-lilac);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: var(--spacing-md);
+}
+
+.featured-seminar__title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text);
+  max-width: 700px;
+  margin: 0 auto var(--spacing-sm);
+  line-height: 1.2;
+}
+
+.featured-seminar__meta {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-lilac-dark);
+  margin-bottom: var(--spacing-md);
+}
+
+.featured-seminar__text {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  max-width: 700px;
+  margin: 0 auto var(--spacing-md);
+  line-height: 1.7;
+}
+
 @media (max-width: 768px) {
   .seminar-sticky-bar__info {
     font-size: 0.8rem;
@@ -2068,6 +2115,14 @@ img {
   }
 
   .seminar-cta__title {
+    font-size: 1.5rem;
+  }
+
+  .featured-seminar {
+    padding: var(--spacing-lg);
+  }
+
+  .featured-seminar__title {
     font-size: 1.5rem;
   }
 }
