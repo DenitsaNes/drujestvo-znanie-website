@@ -80,9 +80,23 @@ const AUDIENCES = [
   { emoji: '🤝', title: 'HR И БИЗНЕС КОНСУЛТАНТИ', text: 'За професионалисти, които подпомагат работодатели и организации.' },
 ];
 
+const STICKY_CTA = '/zapisi?course=trudov-kodeks#registration-form';
+
 function SeminarOct28() {
   return (
     <article className="seminar-landing">
+      <div className="seminar-sticky-bar">
+        <div className="container">
+          <span className="seminar-sticky-bar__info">
+            28 октомври 2026 • Хасково
+          </span>
+          <Link to={STICKY_CTA} className="button">
+            Запиши се
+          </Link>
+        </div>
+      </div>
+      <div className="seminar-sticky-spacer" aria-hidden="true"></div>
+
       {/* HERO */}
       <section className="seminar-hero">
         <div className="container">
@@ -98,7 +112,7 @@ function SeminarOct28() {
             Практически семинар с <strong>Теодора Дичева</strong>
           </p>
           <p className="seminar-hero__meta">28 октомври 2026 г. • Хасково</p>
-          <Link to="/zapisi?course=trudov-kodeks" className="button button--huge seminar-hero__cta">
+          <Link to={STICKY_CTA} className="button button--huge seminar-hero__cta">
             ЗАПИШИ СЕ ЗА СЕМИНАРА
           </Link>
         </div>
@@ -357,7 +371,7 @@ function SeminarOct28() {
           </h2>
           <p className="seminar-cta__speaker">Теодора Дичева</p>
           <p className="seminar-cta__location">Хасково</p>
-          <Link to="/zapisi?course=trudov-kodeks" className="button button--huge">
+          <Link to={STICKY_CTA} className="button button--huge">
             ЗАПИШИ СЕ СЕГА
           </Link>
 
@@ -369,7 +383,7 @@ function SeminarOct28() {
             <p className="seminar-text seminar-text--bold seminar-text--centered">
               Въпросът е: КОГА ЩЕ ЗАПОЧНЕТЕ?
             </p>
-            <Link to="/zapisi?course=trudov-kodeks" className="button button--large">
+            <Link to={STICKY_CTA} className="button button--large">
               ИСКАМ ДА СЕ ПОДГОТВЯ ЗА 2027 →
             </Link>
           </div>

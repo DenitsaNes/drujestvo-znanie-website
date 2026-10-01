@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { courses, getCourseById } from '../data/courses';
 
@@ -27,6 +27,18 @@ function CourseRegistration() {
 
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    const courseParam = searchParams.get('course');
+    if (courseParam) {
+      const form = document.getElementById('registration-form');
+      if (form) {
+        setTimeout(() => {
+          form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [searchParams]);
 
   const selectedCourse = useMemo(
     () => getCourseById(formData.courseId) || courses[0],
@@ -177,6 +189,7 @@ function CourseRegistration() {
         </div>
 
         <form
+          id="registration-form"
           name={FORM_NAME}
           method="POST"
           data-netlify="true"

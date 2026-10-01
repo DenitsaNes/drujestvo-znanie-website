@@ -1546,6 +1546,41 @@ img {
   color: var(--color-text);
 }
 
+.seminar-sticky-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+  padding: 0.75rem 0;
+}
+
+.seminar-sticky-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.seminar-sticky-bar__info {
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.seminar-sticky-bar .button {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.seminar-sticky-spacer {
+  height: 60px;
+}
+
 .seminar-hero {
   background: linear-gradient(135deg, var(--color-lilac-soft), var(--color-background));
   padding: var(--spacing-xl) 0;
@@ -1998,6 +2033,20 @@ img {
 }
 
 @media (max-width: 768px) {
+  .seminar-sticky-bar__info {
+    font-size: 0.8rem;
+    max-width: 55%;
+  }
+
+  .seminar-sticky-bar .button {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .seminar-sticky-spacer {
+    height: 56px;
+  }
+
   .seminar-hero__title {
     font-size: 2rem;
   }
