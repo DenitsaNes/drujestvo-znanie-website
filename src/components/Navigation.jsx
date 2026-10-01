@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const navItems = [
   { to: '/', label: 'Начало' },
+  { to: '/seminar-trudovo-zakonodatelstvo-28-oktomvri', label: '28 октомври' },
   { to: '/upravitelen-savet', label: 'Управителен съвет' },
   { to: '/zapisi', label: 'Записване' },
   { to: '/za-nas', label: 'За нас' },

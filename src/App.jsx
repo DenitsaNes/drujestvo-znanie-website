@@ -8,6 +8,7 @@ import Activities from './pages/Activities';
 import Contacts from './pages/Contacts';
 import CourseRegistration from './pages/CourseRegistration';
 import CourseDetail from './pages/CourseDetail';
+import SeminarOct28 from './pages/SeminarOct28';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="deynost/:courseId" element={<CourseDetail />} />
           <Route path="kontakti" element={<Contacts />} />
           <Route path="zapisi" element={<CourseRegistration />} />
+          <Route path="seminar-trudovo-zakonodatelstvo-28-oktomvri" element={<SeminarOct28 />} />
         </Route>
       </Routes>
     </BrowserRouter>

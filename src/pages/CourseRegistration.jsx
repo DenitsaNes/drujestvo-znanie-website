@@ -4,6 +4,13 @@ import { courses, getCourseById } from '../data/courses';
 
 const FORM_NAME = 'course-registration';
 
+function getGroupPrice(quantity, basePrice) {
+  if (quantity >= 10) return { perPerson: 60, note: 'Корпоративен пакет 10+' };
+  if (quantity >= 5) return { perPerson: 75, note: 'Групова цена 5–9 души' };
+  if (quantity >= 3) return { perPerson: 85, note: 'Групова цена 3–4 души' };
+  return { perPerson: basePrice, note: 'Индивидуална цена' };
+}
+
 function CourseRegistration() {
   const [searchParams] = useSearchParams();
   const initialCourseId = searchParams.get('course') || courses[0].id;
@@ -12,6 +19,8 @@ function CourseRegistration() {
     name: '',
     email: '',
     phone: '',
+    company: '',
+    quantity: 1,
     courseId: initialCourseId,
     notes: '',
   });
@@ -23,6 +32,10 @@ function CourseRegistration() {
     () => getCourseById(formData.courseId) || courses[0],
     [formData.courseId]
   );
+
+  const quantity = Math.max(1, Number(formData.quantity) || 1);
+  const groupPrice = getGroupPrice(quantity, selectedCourse.fullPrice);
+  const totalPrice = groupPrice.perPerson * quantity;
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -71,7 +84,10 @@ function CourseRegistration() {
             Дата: <strong>{selectedCourse.date}</strong>
           </p>
           <p>
-            Цена: <strong>{selectedCourse.fullPrice} €</strong>
+            Цена: <strong>{totalPrice} €</strong>
+            {quantity > 1 && (
+              <span className="price-note"> ({quantity} x {groupPrice.perPerson} €)</span>
+            )}
           </p>
           <p className="success-info">
             Ще се свържем с теб на имейл или телефон с инструкции за плащане по банков
@@ -114,7 +130,7 @@ function CourseRegistration() {
               </div>
               <div className="registration-course__body">
                 <p className="registration-course__price">
-                  <strong>{course.fullPrice} €</strong>
+                  <strong>от {course.fullPrice} €</strong>
                 </p>
                 <h3 className="registration-course__title">Онлайн обучение: {course.title}</h3>
                 <p className="registration-course__description">{course.description}</p>
@@ -138,6 +154,28 @@ function CourseRegistration() {
           <p className="registration-note">{selectedCourse.note}</p>
         </div>
 
+        <div className="group-pricing">
+          <h3 className="group-pricing__title">Групово участие — по-изгодно</h3>
+          <div className="group-pricing__grid">
+            <div className="group-pricing__tier">
+              <span className="group-pricing__qty">1 човек</span>
+              <span className="group-pricing__price">{selectedCourse.fullPrice} €</span>
+            </div>
+            <div className="group-pricing__tier">
+              <span className="group-pricing__qty">3–4 души</span>
+              <span className="group-pricing__price">85 €/човек</span>
+            </div>
+            <div className="group-pricing__tier">
+              <span className="group-pricing__qty">5–9 души</span>
+              <span className="group-pricing__price">75 €/човек</span>
+            </div>
+            <div className="group-pricing__tier">
+              <span className="group-pricing__qty">10+ души</span>
+              <span className="group-pricing__price">60 €/човек</span>
+            </div>
+          </div>
+        </div>
+
         <form
           name={FORM_NAME}
           method="POST"
@@ -148,7 +186,8 @@ function CourseRegistration() {
           <input type="hidden" name="form-name" value={FORM_NAME} />
           <input type="hidden" name="courseTitle" value={selectedCourse.title} />
           <input type="hidden" name="courseDate" value={selectedCourse.date} />
-          <input type="hidden" name="coursePrice" value={`${selectedCourse.fullPrice} €`} />
+          <input type="hidden" name="pricePerPerson" value={`${groupPrice.perPerson} €`} />
+          <input type="hidden" name="totalPrice" value={`${totalPrice} €`} />
 
           <div className="form-row">
             <div className="form-group">
@@ -193,21 +232,53 @@ function CourseRegistration() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="notes">Бележки</label>
+              <label htmlFor="company">Фирма / Организация</label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                placeholder="По желание"
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="quantity">Брой участници</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                value={formData.quantity}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="notes">Бележки / Въпрос към лектора</label>
               <textarea
                 id="notes"
                 name="notes"
                 rows="3"
                 value={formData.notes}
                 onChange={handleChange}
-                placeholder="Допълнителна информация (по желание)"
+                placeholder="Допълнителна информация или конкретен казус (по желание)"
               ></textarea>
             </div>
           </div>
 
           <div className="price-summary">
-            <span className="price-label">Крайна цена:</span>
-            <span className="price-value">{selectedCourse.fullPrice} €</span>
+            <span className="price-label">{groupPrice.note}:</span>
+            <span className="price-value">
+              {totalPrice} €
+              {quantity > 1 && (
+                <span className="price-note"> ({quantity} x {groupPrice.perPerson} €)</span>
+              )}
+            </span>
           </div>
 
           <button
