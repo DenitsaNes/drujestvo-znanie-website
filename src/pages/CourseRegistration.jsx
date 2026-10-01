@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { courses, getCourseById } from '../data/courses';
 
 const FORM_NAME = 'course-registration';
+const ALLOWED_EMAIL_DOMAINS = ['@gmail.com', '@abv.bg', '@yahoo.com'];
 
 function getGroupPrice(quantity, basePrice) {
   if (quantity >= 10) return { perPerson: 60, note: 'Корпоративен пакет 10+' };
@@ -27,6 +28,7 @@ function CourseRegistration() {
 
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const courseParam = searchParams.get('course');
@@ -49,12 +51,37 @@ function CourseRegistration() {
   const groupPrice = getGroupPrice(quantity, selectedCourse.fullPrice);
   const totalPrice = groupPrice.perPerson * quantity;
 
+  const validateForm = (data) => {
+    const newErrors = {};
+
+    const email = data.email.trim().toLowerCase();
+    if (!email) {
+      newErrors.email = 'Моля, въведете имейл.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = 'Моля, въведете валиден имейл.';
+    } else if (!ALLOWED_EMAIL_DOMAINS.some((domain) => email.endsWith(domain))) {
+      newErrors.email = 'Моля, използвайте имейл от gmail.com, abv.bg или yahoo.com.';
+    }
+
+    const phoneDigits = data.phone.replace(/\D/g, '');
+    if (!data.phone.trim()) {
+      newErrors.phone = 'Моля, въведете телефон.';
+    } else if (phoneDigits.length !== 10) {
+      newErrors.phone = 'Телефонът трябва да съдържа точно 10 цифри.';
+    }
+
+    return newErrors;
+  };
+
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
     setFormData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
   };
 
   const selectCourse = (courseId) => {
@@ -63,6 +90,13 @@ function CourseRegistration() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
     setSubmitting(true);
 
     const payload = new FormData(event.target);
@@ -226,7 +260,14 @@ function CourseRegistration() {
                 onChange={handleChange}
                 required
                 placeholder="email@example.com"
+                aria-invalid={errors.email ? 'true' : 'false'}
+                aria-describedby={errors.email ? 'email-error' : undefined}
               />
+              {errors.email && (
+                <p id="email-error" className="form-error" role="alert">
+                  {errors.email}
+                </p>
+              )}
             </div>
           </div>
 
@@ -240,8 +281,16 @@ function CourseRegistration() {
                 value={formData.phone}
                 onChange={handleChange}
                 required
+                pattern="[0-9]{10}"
                 placeholder="08xxxxxxxx"
+                aria-invalid={errors.phone ? 'true' : 'false'}
+                aria-describedby={errors.phone ? 'phone-error' : undefined}
               />
+              {errors.phone && (
+                <p id="phone-error" className="form-error" role="alert">
+                  {errors.phone}
+                </p>
+              )}
             </div>
 
             <div className="form-group">
