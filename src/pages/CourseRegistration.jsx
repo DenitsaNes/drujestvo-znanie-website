@@ -139,10 +139,28 @@ function CourseRegistration() {
               <span className="price-note"> ({quantity} x {groupPrice.perPerson} €)</span>
             )}
           </p>
-          <p className="success-info">
-            Ще се свържем с теб на имейл или телефон с инструкции за плащане по банков
-            път. Записването става финално след получено плащане.
-          </p>
+          <div className="bank-details">
+            <h2 className="bank-details__title">Информация за плащане</h2>
+            <p className="bank-details__note">
+              <strong>Записването става финално след получено плащане.</strong>
+            </p>
+            <p>Моля, преведете сумата по следната сметка:</p>
+            <ul className="bank-details__list">
+              <li>
+                <strong>IBAN:</strong> BG96 STSA 9300 0005 5006 87
+              </li>
+              <li>
+                <strong>BIC:</strong> STSABGSF
+              </li>
+              <li>
+                <strong>Основание:</strong> Семинар 28 октомври — {formData.name}
+              </li>
+            </ul>
+            <p className="success-info">
+              След като плащането бъде получено, ще получите имейл с потвърждение и
+              детайли за участие.
+            </p>
+          </div>
           <Link to="/" className="button">
             Назад към началото
           </Link>
@@ -360,6 +378,12 @@ function CourseRegistration() {
               )}
             </span>
           </div>
+
+          <p className="payment-notice">
+            <strong>Важно:</strong> Записването става финално след получено плащане по
+            банков път. Ще видите данните за плащане веднага след изпращане на
+            заявлението.
+          </p>
 
           <button
             type="submit"
