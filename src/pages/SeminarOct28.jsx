@@ -88,14 +88,14 @@ function SeminarOct28() {
     <>
       <SEO
         title="Семинар: Трудов стаж и прозрачност на заплащането"
-        description="Практически семинар с Теодора Дичева на 28 октомври 2026 в Хасково. Подгответе организацията си за промените в трудовото законодателство през 2027."
+        description="Практически онлайн семинар с Теодора Дичева на 28 октомври 2026. Подгответе организацията си за промените в трудовото законодателство през 2027."
         pathname="/seminar-trudovo-zakonodatelstvo-28-oktomvri"
       />
       <article className="seminar-landing">
       <div className="seminar-sticky-bar">
         <div className="container">
           <span className="seminar-sticky-bar__info">
-            28 октомври 2026 • Хасково
+            28 октомври 2026 • Онлайн през Zoom
           </span>
           <Link to={STICKY_CTA} className="button">
             Запиши се
@@ -118,7 +118,7 @@ function SeminarOct28() {
           <p className="seminar-hero__speaker">
             Практически семинар с <strong>Теодора Дичева</strong>
           </p>
-          <p className="seminar-hero__meta">28 октомври 2026 г. • Хасково</p>
+          <p className="seminar-hero__meta">28 октомври 2026 г. • Онлайн през Zoom</p>
           <Link to={STICKY_CTA} className="button button--huge seminar-hero__cta">
             ЗАПИШИ СЕ ЗА СЕМИНАРА
           </Link>
@@ -377,7 +377,7 @@ function SeminarOct28() {
             ДЕНЯТ, В КОЙТО ЗАПОЧВА ВАШАТА ПОДГОТОВКА ЗА 2027.
           </h2>
           <p className="seminar-cta__speaker">Теодора Дичева</p>
-          <p className="seminar-cta__location">Хасково</p>
+          <p className="seminar-cta__location">Онлайн през Zoom</p>
           <Link to={STICKY_CTA} className="button button--huge">
             ЗАПИШИ СЕ СЕГА
           </Link>
