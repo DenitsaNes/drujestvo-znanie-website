@@ -18,8 +18,7 @@ export const SITE = {
   SEM1_TITLE: 'Трудов стаж в часове и прозрачност на заплащането',
   SEM1_DATE: '28 октомври 2026 г., сряда',
   SEM1_DATE_SHORT: '28 октомври 2026 г.',
-  // [ПОТВЪРДЕТЕ: час]
-  SEM1_TIME: '',
+  SEM1_TIME: '9:00',
   SEM1_LECTURER: 'Теодора Дичева',
   SEM1_ZOOM: 'Онлайн в Zoom',
   SEM1_DURATION: '4 часа',
@@ -29,7 +28,6 @@ export const SITE = {
   EARLY_PRICE: 85,
   EARLY_DEADLINE_ISO: '2026-10-20T23:59:59+03:00',
   EARLY_DEADLINE_BG: '20 октомври 2026 г.',
-  ALUMNI_PRICE: 90,
   GROUP_PRICE_3_4: 85,
   GROUP_PRICE_5_9: 75,
   GROUP_PRICE_10_PLUS: 60,

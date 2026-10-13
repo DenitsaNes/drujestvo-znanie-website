@@ -34,13 +34,17 @@ const FAQ = [
 
 export default function Faq() {
   return (
-    <div className="faq">
-      {FAQ.map((item) => (
-        <details key={item.question}>
-          <summary>{item.question}</summary>
-          <p>{item.answer}</p>
-        </details>
-      ))}
-    </div>
+    <section className="section">
+      <div className="wrap">
+        <div className="faq">
+          {FAQ.map((item) => (
+            <details key={item.question}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

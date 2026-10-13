@@ -20,13 +20,20 @@ const STEPS = [
 
 export default function Steps() {
   return (
-    <ol className="steps">
-      {STEPS.map((step) => (
-        <li key={step.title}>
-          <strong>{step.title}</strong>
-          <span className="muted">{step.text}</span>
-        </li>
-      ))}
-    </ol>
+    <section className="section">
+      <div className="wrap">
+        <div className="section__head">
+          <h2>Как става записването</h2>
+        </div>
+        <ol className="steps">
+          {STEPS.map((step) => (
+            <li key={step.title}>
+              <strong>{step.title}</strong>
+              <span className="muted">{step.text}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
   );
 }

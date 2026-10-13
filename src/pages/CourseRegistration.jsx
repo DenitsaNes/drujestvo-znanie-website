@@ -115,7 +115,6 @@ export default function CourseRegistration() {
     invoiceEik: '',
     invoiceAddress: '',
     mol: '',
-    alumni: false,
     question: '',
     certificate: true,
     newsletter: false,
@@ -134,9 +133,8 @@ export default function CourseRegistration() {
     () =>
       calculatePrice({
         participants: formData.participants,
-        alumni: formData.alumni,
       }),
-    [formData.participants, formData.alumni]
+    [formData.participants]
   );
 
   const handleChange = (e) => {
@@ -171,7 +169,6 @@ export default function CourseRegistration() {
     payload.append('invoiceEik', formData.invoiceEik);
     payload.append('invoiceAddress', formData.invoiceAddress);
     payload.append('mol', formData.mol);
-    payload.append('alumni', formData.alumni ? 'yes' : 'no');
     payload.append('question', formData.question);
     payload.append('certificate', formData.certificate ? 'yes' : 'no');
     payload.append('newsletter', formData.newsletter ? 'yes' : 'no');
@@ -317,15 +314,6 @@ export default function CourseRegistration() {
                 onChange={handleChange}
               />
             </Field>
-
-            <div className="checks-group">
-              <Checkbox
-                label={`Участвал/а съм в предишен семинар на „Знание“ — отстъпка ${fmtPrice(SITE.PRICE - SITE.ALUMNI_PRICE)}`}
-                name="alumni"
-                checked={formData.alumni}
-                onChange={handleChange}
-              />
-            </div>
 
             <Field label="Въпрос към лектора" hint="Опишете казуса си. Подбраните въпроси ще бъдат разгледани на семинара.">
               <textarea

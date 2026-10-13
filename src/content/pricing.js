@@ -1,7 +1,7 @@
 import { SITE, fmtPrice } from './site';
 import { isEarlyPriceActive } from '../hooks/useEarlyPrice';
 
-export function calculatePrice({ participants, alumni }) {
+export function calculatePrice({ participants }) {
   const count = Math.max(1, Number(participants) || 1);
   const early = isEarlyPriceActive();
 
@@ -9,10 +9,6 @@ export function calculatePrice({ participants, alumni }) {
 
   if (early) {
     perPerson = SITE.EARLY_PRICE;
-  }
-
-  if (alumni && SITE.ALUMNI_PRICE < perPerson) {
-    perPerson = SITE.ALUMNI_PRICE;
   }
 
   if (count >= 10 && SITE.GROUP_PRICE_10_PLUS < perPerson) {

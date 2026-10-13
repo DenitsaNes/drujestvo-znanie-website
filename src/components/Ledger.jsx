@@ -24,10 +24,6 @@ export default function Ledger() {
             </tr>
           )}
           <tr>
-            <td>Участвали в наш предишен семинар</td>
-            <td>{fmtPrice(SITE.ALUMNI_PRICE)}</td>
-          </tr>
-          <tr>
             <td>Група от 3–4 души от една организация</td>
             <td>{fmtPrice(SITE.GROUP_PRICE_3_4)}</td>
           </tr>

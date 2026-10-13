@@ -246,30 +246,6 @@ function Lecturer() {
   );
 }
 
-function Prices() {
-  return (
-    <section className="section" id="ceni">
-      <div className="wrap">
-        <div className="section__head">
-          <h2>Цени</h2>
-          <p>Цената е крайна. {SITE.ORG} не е регистрирано по ДДС, затова към сумата не се начислява ДДС.</p>
-        </div>
-        <Ledger />
-        <p className="ledger-note muted">Отстъпките не се събират — прилагаме най-изгодната за Вас.</p>
-        <p className="ledger-note muted">Мястото Ви е потвърдено, когато плащането постъпи по банков път.</p>
-        <div className="actions" style={{ marginTop: 28 }}>
-          <Link className="btn btn--primary" to={registrationHref({ course: 'trudov-kodeks' })}>
-            Запишете се
-          </Link>
-          <Link className="btn btn--ghost" to={registrationHref({ group: true, course: 'trudov-kodeks' })}>
-            Запишете група
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function SeminarOct28() {
   return (
     <>
@@ -287,7 +263,6 @@ export default function SeminarOct28() {
       <WhatYouGet />
       <Lecturer />
       <Groups />
-      <Prices />
       <Steps />
       <Faq />
       <ClosingCta />
