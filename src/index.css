@@ -552,6 +552,25 @@ p {
   }
 }
 
+.ready-pack-col {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.ready-pack-col .list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0;
+  margin-top: 12px;
+}
+
+.ready-pack-col .list li {
+  margin: 0;
+}
+
 .two h3 {
   margin-bottom: 12px;
 }
