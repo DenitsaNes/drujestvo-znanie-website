@@ -100,43 +100,13 @@ function WhatYouGet() {
         <div className="section__head">
           <h2>Не само лекция</h2>
         </div>
-        <div className="two">
-          <div>
-            <h3>С участието получавате</h3>
-            <ul className="list" style={{ marginTop: 16 }}>
-              <li>Четири часа практическо обучение с {SITE.SEM1_LECTURER}</li>
-              <li>Учебни материали</li>
-              <li>Сертификат за участие</li>
-              <li>Време за Вашите въпроси по време на семинара</li>
-            </ul>
-          </div>
-          <div>
-            <h3>2027 READY PACK</h3>
-            <p className="pack-intro">Практически материали, които ползвате и след семинара:</p>
-            <ul className="list" style={{ marginTop: 12 }}>
-              <li>
-                <strong>Checklist „Готови ли сме за 2027?“</strong> — трудови договори, работно време,
-                стаж, вътрешни правила, възнаграждения и документи.
-              </li>
-              <li>
-                <strong>Самооценка за прозрачност на заплащането</strong> — въпроси, които показват кои
-                области в организацията трябва да се прегледат.
-              </li>
-              <li>
-                <strong>Практически казуси</strong> — непълно работно време, повече от един договор,
-                изчисляване на стажа, възнаграждения.
-              </li>
-              <li>
-                <strong>Актуализация</strong> — при съществени промени в разгледаните правила ще Ви
-                изпратим обновена информация.
-              </li>
-              <li>
-                <strong>Въпрос към лектора</strong> — опишете казуса си при записването. Част от
-                въпросите ще бъдат разгледани на семинара.
-              </li>
-            </ul>
-          </div>
-        </div>
+        <h3>С участието получавате</h3>
+        <ul className="list" style={{ marginTop: 16 }}>
+          <li>Четири часа практическо обучение с {SITE.SEM1_LECTURER}</li>
+          <li>Учебни материали</li>
+          <li>Сертификат за участие</li>
+          <li>Време за Вашите въпроси по време на семинара</li>
+        </ul>
       </div>
     </section>
   );
@@ -176,7 +146,7 @@ function Lecturer() {
 
 function Prices() {
   return (
-    <section className="section" id="ceni">
+    <section className="section section--center" id="ceni">
       <div className="wrap">
         <div className="section__head">
           <h2>Цени</h2>
