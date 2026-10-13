@@ -5,7 +5,7 @@ function Privacy() {
     <>
       <SEO
         title="Политика за поверителност"
-        description="Политика за поверителност и обработка на лични данни на Дружество „Знание“, гр. Хасково."
+        description="Политика за поверителност и обработка на лични данни на Дружество „Знание“, Хасково."
         pathname="/politika-za-poveritelnost"
       />
       <section className="section">

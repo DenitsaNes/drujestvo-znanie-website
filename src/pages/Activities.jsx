@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 function Activities() {
   return (
-    <section className="section">
+    <>
+      <SEO
+        title="Дейност и обучения"
+        description="Програми, проекти и онлайн обучения по счетоводство, данъчно и трудово законодателство от Дружество „Знание“."
+        pathname="/deynost"
+      />
+      <section className="section">
       <div className="container">
         <h1 className="page-title">Дейност</h1>
 
@@ -33,6 +40,7 @@ function Activities() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 

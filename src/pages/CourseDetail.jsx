@@ -1,5 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { getCourseById } from '../data/courses';
+import SEO from '../components/SEO';
 
 function CourseDetail() {
   const { courseId } = useParams();
@@ -13,7 +14,13 @@ function CourseDetail() {
   const savings = fullPrice && earlyPrice && fullPrice > earlyPrice ? fullPrice - earlyPrice : 0;
 
   return (
-    <section className="section course-detail">
+    <>
+      <SEO
+        title={`${title} | Онлайн семинар`}
+        description={`Практически онлайн семинар по ${title} с Дружество „Знание“. ${description} Запишете се за ${date}.`}
+        pathname={`/deynost/${course.id}`}
+      />
+      <section className="section course-detail">
       <div className="container">
         {/* Ранно записване / спешност */}
         <div className="course-urgency">
@@ -90,7 +97,9 @@ function CourseDetail() {
               <p>
                 <strong>Дружество „Знание“</strong>
                 <br />
-                IBAN: <strong>BG00 XXXX 0000 0000 0000 00</strong>
+                IBAN: <strong>BG96 STSA 9300 0005 5006 87</strong>
+                <br />
+                BIC: <strong>STSABGSF</strong>
                 <br />
                 Основание: <strong>„{title} — {date}"</strong>
               </p>
@@ -154,6 +163,7 @@ function CourseDetail() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 
