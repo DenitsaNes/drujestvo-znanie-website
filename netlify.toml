@@ -1,0 +1,19 @@
+[[redirects]]
+  from = "/seminar-trudovo-zakonodatelstvo-28-oktomvri"
+  to = "/seminar-trudov-stazh-28-oktomvri"
+  status = 301
+
+[[redirects]]
+  from = "/deynost/trudov-kodeks"
+  to = "/seminar-trudov-stazh-28-oktomvri"
+  status = 301
+
+[[redirects]]
+  from = "/upravitelen-savet"
+  to = "/za-nas#upravitelen-savet"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
