@@ -23,23 +23,8 @@ export default function Ledger() {
               <td>{fmtPrice(SITE.EARLY_PRICE)}</td>
             </tr>
           )}
-          <tr>
-            <td>Група от 3–4 души от една организация</td>
-            <td>{fmtPrice(SITE.GROUP_PRICE_3_4)}</td>
-          </tr>
-          <tr>
-            <td>Група от 5–9 души</td>
-            <td>{fmtPrice(SITE.GROUP_PRICE_5_9)}</td>
-          </tr>
-          <tr>
-            <td>Група от 10 и повече души</td>
-            <td>{fmtPrice(SITE.GROUP_PRICE_10_PLUS)}</td>
-          </tr>
         </tbody>
       </table>
-      <p className="ledger-note muted">
-        Отстъпките не се събират — прилагаме най-изгодната за Вас.
-      </p>
       <p className="ledger-note muted">
         Мястото Ви е потвърдено, когато плащането постъпи по банков път.
       </p>

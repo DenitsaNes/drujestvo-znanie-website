@@ -30,20 +30,6 @@ export default function SeminarSlip() {
         <dd className="price">
           {fmtPrice(SITE.PRICE)}
           <span className="sub">на участник</span>
-          <span className="stamp" aria-hidden="true">
-            <span>
-              <b>
-                крайна
-                <br />
-                цена
-              </b>
-              <span>
-                без ДДС
-                <br />
-                отгоре
-              </span>
-            </span>
-          </span>
         </dd>
         {SITE.EARLY_PRICE_ACTIVE && (
           <>

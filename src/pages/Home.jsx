@@ -29,9 +29,6 @@ function HeroA() {
               Вижте програмата
             </Link>
           </div>
-          <p className="hero__note small muted">
-            Цената е крайна. Дружеството не е регистрирано по ДДС и не начислява ДДС отгоре.
-          </p>
         </div>
         <SeminarSlip />
       </div>
@@ -183,11 +180,8 @@ function Prices() {
       <div className="wrap">
         <div className="section__head">
           <h2>Цени</h2>
-          <p>Цената е крайна. {SITE.ORG} не е регистрирано по ДДС, затова към сумата не се начислява ДДС.</p>
         </div>
         <Ledger />
-        <p className="ledger-note muted">Отстъпките не се събират — прилагаме най-изгодната за Вас.</p>
-        <p className="ledger-note muted">Мястото Ви е потвърдено, когато плащането постъпи по банков път.</p>
         <div className="actions" style={{ marginTop: 28 }}>
           <Link className="btn btn--primary" to={registrationHref({ course: 'trudov-kodeks' })}>
             Запишете се
@@ -222,7 +216,7 @@ export default function Home() {
     <>
       <SEO
         title="Семинар „Трудов стаж в часове от 2027“ — 28 октомври"
-        description="Онлайн семинар с Теодора Дичева за счетоводители, ТРЗ и HR: трудовият стаж в часове от 2027 г. и прозрачност на заплащането. 28 октомври, Zoom, 100 € крайна цена."
+        description="Онлайн семинар с Теодора Дичева за счетоводители, ТРЗ и HR: трудовият стаж в часове от 2027 г. и прозрачност на заплащането. 28 октомври, Zoom, 100 €."
         pathname={ROUTES.HOME}
         image={SITE.SEMINAR_OG_IMAGE}
       />

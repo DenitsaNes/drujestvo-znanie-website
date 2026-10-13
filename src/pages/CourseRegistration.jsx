@@ -202,7 +202,7 @@ export default function CourseRegistration() {
     <>
       <SEO
         title="Записване за семинар"
-        description="Запишете се за онлайн семинар на Дружество „Знание“. Крайна цена без ДДС отгоре, групови отстъпки, сертификат за участие."
+        description="Запишете се за онлайн семинар на Дружество „Знание“. Сертификат за участие."
         pathname={ROUTES.ZAPISI}
       />
       <SeminarCards selected={selectedCourse} onSelect={handleSelect} />
@@ -342,7 +342,6 @@ export default function CourseRegistration() {
 
             <div className="price-summary" aria-live="polite">
               <strong>{formatTotal(price)}</strong>
-              <p className="small muted">Цената е крайна — без ДДС отгоре.</p>
             </div>
 
             <div className="checks-group">

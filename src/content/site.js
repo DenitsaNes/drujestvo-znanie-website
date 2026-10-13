@@ -5,7 +5,7 @@ export const SITE = {
   // Organisation
   ORG: 'Дружество „Знание“',
   ORG_SHORT: 'Знание',
-  LEGAL: 'Сдружение, основано през 1991 г. · ЕИК 000907978 · Не е регистрирано по ДДС.',
+  LEGAL: 'Сдружение, основано през 1991 г. · ЕИК 000907978.',
   FOUNDED: '1991',
   ADDRESS:
     'ж.к. „Училищни“, бул. „България“ 150, сграда „21 век“, офис 513, 6300 Хасково',
@@ -28,10 +28,6 @@ export const SITE = {
   EARLY_PRICE: 85,
   EARLY_DEADLINE_ISO: '2026-10-20T23:59:59+03:00',
   EARLY_DEADLINE_BG: '20 октомври 2026 г.',
-  GROUP_PRICE_3_4: 85,
-  GROUP_PRICE_5_9: 75,
-  GROUP_PRICE_10_PLUS: 60,
-
   // Early price switch
   // При true ранната цена се рендерира; при false се крие и в статичното HTML липсва.
   // Превключете на false и прекомпилирайте след EARLY_DEADLINE_ISO.
