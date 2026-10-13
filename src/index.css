@@ -2,6 +2,13 @@
    Design system "Znanie" — taken verbatim from docs/02-homepage-design.html
    ========================================================================== */
 
+@import '@fontsource/golos-text/400.css';
+@import '@fontsource/golos-text/500.css';
+@import '@fontsource/golos-text/600.css';
+@import '@fontsource/literata/500.css';
+@import '@fontsource/literata/600.css';
+@import '@fontsource/literata/700.css';
+
 :root {
   /* Colour — the existing brand lilac palette */
   --lilac: #B68CD6;
