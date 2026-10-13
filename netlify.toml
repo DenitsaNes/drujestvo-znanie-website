@@ -1,3 +1,13 @@
+# This site is built with Vite (output in dist/). The repo still contains a
+# `next` dependency and next.config.ts, which makes Netlify auto-install the
+# Next.js runtime plugin; skip it so it doesn't fail the build.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
 [[redirects]]
   from = "/seminar-trudovo-zakonodatelstvo-28-oktomvri"
   to = "/seminar-trudov-stazh-28-oktomvri"
