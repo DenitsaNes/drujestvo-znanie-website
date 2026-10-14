@@ -26,7 +26,13 @@ export default function About() {
           </p>
 
           <h2 style={{ marginTop: 48 }}>Управителен съвет</h2>
-          <p className="muted">[ПОТВЪРДЕТЕ: имена и роли]</p>
+          <ul className="list" style={{ marginTop: 16 }}>
+            <li>Милен Господинов Несторов</li>
+            <li>Христина Вълкова Хубенова</li>
+            <li>Маргарита Атанасова Димитрова</li>
+            <li>Златка Димитрова Михайлова-Найденова</li>
+            <li>Татяна Ангелова Матева</li>
+          </ul>
 
           <h2 style={{ marginTop: 48 }}>Данни за организацията</h2>
           <table className="ledger" style={{ marginTop: 20 }}>
