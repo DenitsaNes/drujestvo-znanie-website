@@ -777,6 +777,10 @@ p {
   margin-bottom: 6px;
 }
 
+.section--center .steps {
+  text-align: center;
+}
+
 @media (max-width: 960px) {
   .steps {
     grid-template-columns: 1fr 1fr;

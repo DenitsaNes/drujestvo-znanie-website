@@ -20,7 +20,7 @@ const STEPS = [
 
 export default function Steps() {
   return (
-    <section className="section">
+    <section className="section section--center">
       <div className="wrap">
         <div className="section__head">
           <h2>Как става записването</h2>

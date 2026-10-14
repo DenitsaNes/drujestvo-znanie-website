@@ -187,7 +187,7 @@ function Prices() {
 
 function Upcoming() {
   return (
-    <section className="section" id="yanuari">
+    <section className="section section--center" id="yanuari">
       <div className="wrap">
         <div className="section__head">
           <h2>Следващите семинари — януари 2027</h2>
