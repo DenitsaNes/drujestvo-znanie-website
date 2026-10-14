@@ -48,7 +48,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 120px;
+  scroll-padding-top: 64px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -184,6 +184,9 @@ p {
 
 /* Announcement bar */
 .notice {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background: var(--ink);
   color: #fff;
   font-size: var(--fs-small);
@@ -209,14 +212,6 @@ p {
 .notice a {
   color: #fff;
   font-weight: 600;
-}
-
-/* Sticky top bar: notice + header */
-.site-top {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--paper);
 }
 
 /* Header */
@@ -337,7 +332,15 @@ p {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   gap: clamp(32px, 5vw, 72px);
-  align-items: start;
+  align-items: stretch;
+}
+
+.hero__grid > .slip {
+  height: 100%;
+}
+
+.hero__grid > .slip dl {
+  height: 100%;
 }
 
 .hero__context {

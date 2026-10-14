@@ -10,10 +10,8 @@ function Layout() {
   return (
     <>
       <a className="skip" href="#main">Към съдържанието</a>
-      <div className="site-top">
-        <AnnouncementBar />
-        <Header />
-      </div>
+      <AnnouncementBar />
+      <Header />
       <main id="main">
         <Outlet />
       </main>
