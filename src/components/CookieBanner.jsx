@@ -22,6 +22,7 @@ export default function CookieBanner() {
       if (value === 'yes' && window.dataLayer) {
         window.dataLayer.push({ event: 'cookie_consent_given' });
       }
+      window.dispatchEvent(new Event('znanie-consent'));
     } catch {
       // ignore
     }
