@@ -50,3 +50,5 @@ firebase-debug.*.log
 
 # Waitlist data (contains user emails - keep private)
 data/waitlist.json
+# Local Netlify folder
+.netlify

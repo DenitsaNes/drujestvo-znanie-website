@@ -8,6 +8,9 @@
 [build.environment]
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
+[functions]
+  directory = "netlify/functions"
+
 [[redirects]]
   from = "/seminar-trudovo-zakonodatelstvo-28-oktomvri"
   to = "/seminar-trudov-stazh-28-oktomvri"
