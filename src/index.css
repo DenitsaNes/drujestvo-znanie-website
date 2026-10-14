@@ -385,7 +385,8 @@ p {
 .slip dl {
   margin: 0;
   display: grid;
-  grid-template-columns: 9.5em 1fr;
+  grid-template-columns: minmax(5.5em, auto) 1fr;
+  gap: 0 16px;
 }
 
 .slip dt,
@@ -394,6 +395,8 @@ p {
   padding: 12px 0 11px;
   border-bottom: 1px dotted #D3C4DE;
   min-height: 48px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .slip dt {
@@ -416,13 +419,13 @@ p {
 .slip dd.price {
   font: 700 1.75rem/1.1 var(--serif);
   position: relative;
-  min-height: 128px;
+  min-height: 0;
   padding-top: 22px;
-  padding-right: 124px;
+  padding-right: 0;
 }
 
 .slip dd.price .sub {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .slip dd.early mark,
@@ -442,7 +445,7 @@ p {
   border-bottom: 0;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 640px) {
   .slip {
     padding: 22px 18px 18px;
   }

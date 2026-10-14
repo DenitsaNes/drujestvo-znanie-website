@@ -111,10 +111,7 @@ function WhatYouGet() {
             </ul>
           </div>
           <div className="ready-pack-col">
-            <div>
-              <h3>2027 READY PACK</h3>
-              <p className="pack-intro">Практически материали, които ползвате и след семинара:</p>
-            </div>
+            <h3>2027 READY PACK</h3>
             <ul className="list">
               <li>
                 <strong>Практически казуси</strong> — непълно работно време, повече от един договор,
