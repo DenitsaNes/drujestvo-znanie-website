@@ -344,6 +344,12 @@ export default function CourseRegistration() {
               <strong>{formatTotal(price)}</strong>
             </div>
 
+            <div className="bank-details" style={{ marginTop: 24, marginBottom: 8 }}>
+              <h3 style={{ fontSize: '1.125rem', marginBottom: 8 }}>Данни за плащане</h3>
+              <p className="muted small">IBAN: {SITE.BANK_IBAN}</p>
+              <p className="muted small">BIC/SWIFT: {SITE.BANK_BIC}</p>
+            </div>
+
             <div className="checks-group">
               <Checkbox
                 label={

@@ -48,6 +48,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 120px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -208,6 +209,14 @@ p {
 .notice a {
   color: #fff;
   font-weight: 600;
+}
+
+/* Sticky top bar: notice + header */
+.site-top {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--paper);
 }
 
 /* Header */

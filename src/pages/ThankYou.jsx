@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { SITE, ROUTES, fmtPrice, emailHref } from '../content/site';
 
+
 export default function ThankYou() {
   const { state } = useLocation();
   const name = state?.name || '';
@@ -45,8 +46,8 @@ export default function ThankYou() {
           <table className="ledger" style={{ marginTop: 24 }}>
             <tbody>
               <tr><td>Получател</td><td>{SITE.ORG}</td></tr>
-              <tr><td>IBAN</td><td>[ПОТВЪРДЕТЕ]</td></tr>
-              <tr><td>Банка</td><td>[ПОТВЪРДЕТЕ]</td></tr>
+              <tr><td>IBAN</td><td>{SITE.BANK_IBAN}</td></tr>
+              <tr><td>BIC/SWIFT</td><td>{SITE.BANK_BIC}</td></tr>
               <tr><td>Сума</td><td>{fmtPrice(total)}</td></tr>
               <tr><td>Основание</td><td>Семинар 28.10 — {name}</td></tr>
             </tbody>

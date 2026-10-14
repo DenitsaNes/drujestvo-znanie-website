@@ -1,3 +1,5 @@
+import { SITE } from '../content/site';
+
 const STEPS = [
   { title: 'Попълвате формата.', text: 'Отнема около две минути.' },
   {
@@ -33,6 +35,11 @@ export default function Steps() {
             </li>
           ))}
         </ol>
+        <div className="bank-details" style={{ marginTop: 32 }}>
+          <h3>Данни за плащане</h3>
+          <p className="muted">IBAN: {SITE.BANK_IBAN}</p>
+          <p className="muted">BIC/SWIFT: {SITE.BANK_BIC}</p>
+        </div>
       </div>
     </section>
   );

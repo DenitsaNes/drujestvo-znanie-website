@@ -26,6 +26,11 @@ export const SITE = {
   // Pricing
   PRICE: 100,
   EARLY_PRICE: 85,
+
+  // Bank details for wire transfers
+  BANK_IBAN: 'BG96STSA93000005500687',
+  BANK_BIC: 'STSABGSF',
+
   EARLY_DEADLINE_ISO: '2026-10-20T23:59:59+03:00',
   EARLY_DEADLINE_BG: '20 октомври 2026 г.',
   // Early price switch
