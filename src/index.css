@@ -617,6 +617,15 @@ p {
   margin-bottom: 12px;
 }
 
+.two--center {
+  text-align: center;
+}
+
+.two--center .measure {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .textlink {
   display: inline-block;
   margin-top: 28px;

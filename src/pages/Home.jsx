@@ -63,12 +63,12 @@ function HeroB() {
 
 function WhatChanges() {
   return (
-    <section className="section" id="seminari">
+    <section className="section section--center" id="seminari">
       <div className="wrap">
         <div className="section__head">
           <h2>Две промени, които засягат всяко ТРЗ</h2>
         </div>
-        <div className="two">
+        <div className="two two--center">
           <div>
             <h3>Трудовият стаж в часове</h3>
             <p className="measure">
@@ -85,9 +85,11 @@ function WhatChanges() {
             </p>
           </div>
         </div>
-        <Link className="textlink" to={`${ROUTES.SEMINAR_28_OKT}#programa`}>
-          Вижте цялата програма
-        </Link>
+        <div style={{ textAlign: 'center' }}>
+          <Link className="textlink" to={`${ROUTES.SEMINAR_28_OKT}#programa`}>
+            Вижте цялата програма
+          </Link>
+        </div>
       </div>
     </section>
   );
