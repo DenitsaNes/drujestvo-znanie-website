@@ -67,7 +67,7 @@ function Program() {
         <div className="two">
           <div>
             <h3>Част 1. Новото изчисляване на трудовия стаж</h3>
-            <ul className="list" style={{ marginTop: 12 }}>
+            <ul className="list list--bulleted" style={{ marginTop: 12 }}>
               <li>изчисляване на стажа в часове, дни, месеци и години</li>
               <li>как се отчита действително положеният труд</li>
               <li>работа на непълно работно време</li>
@@ -80,7 +80,7 @@ function Program() {
           </div>
           <div>
             <h3>Част 2. Прозрачност на заплащането</h3>
-            <ul className="list" style={{ marginTop: 12 }}>
+            <ul className="list list--bulleted" style={{ marginTop: 12 }}>
               <li>равно заплащане за равен труд или за труд с равна стойност</li>
               <li>какви критерии трябва да използва работодателят</li>
               <li>каква информация за заплащането може да бъде поискана</li>
@@ -110,7 +110,7 @@ function AfterSeminar() {
         <div className="section__head">
           <h2>След семинара ще можете</h2>
         </div>
-        <ul className="list">
+        <ul className="list list--bulleted">
           <li>да обясните какво точно се променя;</li>
           <li>да прецените кои процеси във Вашата организация трябва да се прегледат;</li>
           <li>да откриете проблемните места навреме;</li>
@@ -130,7 +130,7 @@ function Audience() {
         <div className="section__head">
           <h2>За кого е</h2>
         </div>
-        <ul className="list">
+        <ul className="list list--bulleted">
           <li><strong>Счетоводители и ТРЗ</strong> — работите с трудови договори, възнаграждения и стаж.</li>
           <li><strong>HR специалисти</strong> — ще прилагате промените всеки ден.</li>
           <li><strong>Работодатели и управители</strong> — отговаряте за организацията.</li>

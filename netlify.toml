@@ -11,6 +11,11 @@
 [functions]
   directory = "netlify/functions"
 
+[dev]
+  command = "npm run dev"
+  targetPort = 5173
+  port = 8888
+
 [[redirects]]
   from = "/seminar-trudovo-zakonodatelstvo-28-oktomvri"
   to = "/seminar-trudov-stazh-28-oktomvri"
