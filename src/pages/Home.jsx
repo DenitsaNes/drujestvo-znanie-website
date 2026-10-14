@@ -95,7 +95,7 @@ function WhatChanges() {
 
 function WhatYouGet() {
   return (
-    <section className="section">
+    <section className="section section--center">
       <div className="wrap">
         <div className="section__head">
           <h2>Не само лекция</h2>
