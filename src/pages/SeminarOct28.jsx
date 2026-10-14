@@ -173,19 +173,19 @@ function WhatYouGet() {
           <h2>Не само лекция</h2>
         </div>
         <div className="two">
-          <div>
+          <div className="ready-pack-col">
             <h3>С участието получавате</h3>
-            <ul className="list" style={{ marginTop: 16 }}>
+            <ul className="list">
               <li>Четири часа практическо обучение с {SITE.SEM1_LECTURER}</li>
               <li>Учебни материали</li>
               <li>Сертификат за участие</li>
               <li>Време за Вашите въпроси по време на семинара</li>
             </ul>
           </div>
-          <div>
+          <div className="ready-pack-col">
             <h3>2027 READY PACK</h3>
             <p className="pack-intro">Практически материали, които ползвате и след семинара:</p>
-            <ul className="list" style={{ marginTop: 12 }}>
+            <ul className="list">
               <li>
                 <strong>Checklist „Готови ли сме за 2027?“</strong> — трудови договори, работно време,
                 стаж, вътрешни правила, възнаграждения и документи.
@@ -216,7 +216,7 @@ function WhatYouGet() {
 
 function Lecturer() {
   return (
-    <section className="section" id="lektor">
+    <section className="section section--center" id="lektor">
       <div className="wrap">
         <div className="section__head">
           <h2>Лекторът</h2>

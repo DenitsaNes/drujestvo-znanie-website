@@ -101,9 +101,9 @@ function WhatYouGet() {
           <h2>Не само лекция</h2>
         </div>
         <div className="two">
-          <div>
+          <div className="ready-pack-col">
             <h3>С участието получавате</h3>
-            <ul className="list" style={{ marginTop: 16 }}>
+            <ul className="list">
               <li>Четири часа практическо обучение с {SITE.SEM1_LECTURER}</li>
               <li>Учебни материали</li>
               <li>Сертификат за участие</li>
@@ -131,7 +131,7 @@ function WhatYouGet() {
 
 function Lecturer() {
   return (
-    <section className="section" id="lektor">
+    <section className="section section--center" id="lektor">
       <div className="wrap">
         <div className="section__head">
           <h2>Лекторът</h2>
