@@ -654,15 +654,10 @@ p {
 }
 
 .portrait {
-  aspect-ratio: 4 / 5;
-  background: var(--stamp-tint);
+  width: 100%;
+  height: auto;
+  object-fit: cover;
   border: 1px solid var(--rule);
-  display: grid;
-  place-items: center;
-  color: var(--ink-2);
-  font-size: var(--fs-small);
-  text-align: center;
-  padding: 24px;
 }
 
 .lecturer__role {

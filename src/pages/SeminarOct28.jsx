@@ -222,11 +222,14 @@ function Lecturer() {
           <h2>Лекторът</h2>
         </div>
         <div className="lecturer">
-          <div className="portrait" role="img" aria-label={`${SITE.SEM1_LECTURER}, лектор`}>
-            Снимка на {SITE.SEM1_LECTURER}
-            <br />
-            4:5, мин. 800×1000 px
-          </div>
+          <img
+            className="portrait"
+            src="/teodora-dicheva.png"
+            alt={`${SITE.SEM1_LECTURER}, лектор`}
+            width="800"
+            height="1000"
+            loading="lazy"
+          />
           <div>
             <h3 style={{ fontSize: '1.75rem' }}>{SITE.SEM1_LECTURER}</h3>
             <p className="lecturer__role">Юрист, експерт по трудово законодателство</p>
