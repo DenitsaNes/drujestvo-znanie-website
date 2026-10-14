@@ -11,21 +11,21 @@ function Hero() {
   return (
     <section className="hero">
       <div className="wrap hero__grid">
-        <div>
+        <div className="hero__text">
           <p className="hero__context">{SITE.SEM1_DATE_SHORT}, онлайн в Zoom</p>
           <h1>Трудовият стаж в часове и прозрачността на заплащането: какво да подготвите преди 2027 г.</h1>
           <p className="hero__lead">
             Практически семинар с {SITE.SEM1_LECTURER} за работодатели, счетоводители, ТРЗ и HR
             специалисти, юристи и мениджъри.
           </p>
-          <div className="actions">
-            <Link className="btn btn--primary" to={registrationHref({ course: 'trudov-kodeks' })}>
-              Запишете се за 28 октомври
-            </Link>
-            <Link className="btn btn--ghost" to={registrationHref({ group: true, course: 'trudov-kodeks' })}>
-              Запишете група
-            </Link>
-          </div>
+        </div>
+        <div className="hero__actions">
+          <Link className="btn btn--primary" to={registrationHref({ course: 'trudov-kodeks' })}>
+            Запишете се за 28 октомври
+          </Link>
+          <Link className="btn btn--ghost" to={registrationHref({ group: true, course: 'trudov-kodeks' })}>
+            Запишете група
+          </Link>
         </div>
         <SeminarSlip />
       </div>

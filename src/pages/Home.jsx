@@ -13,7 +13,7 @@ function HeroA() {
   return (
     <section className="hero">
       <div className="wrap hero__grid">
-        <div>
+        <div className="hero__text">
           <p className="hero__context">Онлайн семинар за счетоводители, ТРЗ и HR специалисти</p>
           <h1>От 2027 г. трудовият стаж се смята в часове. Подгответе се на 28 октомври.</h1>
           <p className="hero__lead">
@@ -21,14 +21,14 @@ function HeroA() {
             и бивш директор на нейната правна дирекция. Ще видите какво се променя при трудовия стаж и при
             прозрачността на заплащането и какво да подготвите в документите си още сега.
           </p>
-          <div className="actions">
-            <Link className="btn btn--primary" to={registrationHref({ course: 'trudov-kodeks' })}>
-              Запишете се за 28 октомври
-            </Link>
-            <Link className="btn btn--ghost" to={`${ROUTES.SEMINAR_28_OKT}#programa`}>
-              Вижте програмата
-            </Link>
-          </div>
+        </div>
+        <div className="hero__actions">
+          <Link className="btn btn--primary" to={registrationHref({ course: 'trudov-kodeks' })}>
+            Запишете се за 28 октомври
+          </Link>
+          <Link className="btn btn--ghost" to={`${ROUTES.SEMINAR_28_OKT}#programa`}>
+            Вижте програмата
+          </Link>
         </div>
         <SeminarSlip />
       </div>
