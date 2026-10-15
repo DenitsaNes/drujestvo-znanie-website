@@ -3,7 +3,6 @@ import AnnouncementBar from './AnnouncementBar';
 import Header from './Header';
 import Footer from './Footer';
 import CookieBanner from './CookieBanner';
-import Analytics from './Analytics';
 import { useScrollToHash } from '../hooks/useScrollToHash';
 
 function Layout() {
@@ -18,7 +17,6 @@ function Layout() {
       </main>
       <Footer />
       <CookieBanner />
-      <Analytics />
     </>
   );
 }

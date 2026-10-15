@@ -19,7 +19,16 @@ export default function CookieBanner() {
   const setConsent = (value) => {
     try {
       localStorage.setItem(CONSENT_KEY, value);
-      if (value === 'yes' && window.dataLayer) {
+      const granted = value === 'yes';
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          ad_storage: granted ? 'granted' : 'denied',
+          ad_user_data: granted ? 'granted' : 'denied',
+          ad_personalization: granted ? 'granted' : 'denied',
+          analytics_storage: granted ? 'granted' : 'denied',
+        });
+      }
+      if (granted && window.dataLayer) {
         window.dataLayer.push({ event: 'cookie_consent_given' });
       }
       window.dispatchEvent(new Event('znanie-consent'));
