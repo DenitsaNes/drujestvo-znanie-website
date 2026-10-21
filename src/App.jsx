@@ -10,6 +10,7 @@ import About from './pages/About';
 import Contacts from './pages/Contacts';
 import Privacy from './pages/Privacy';
 import Cookies from './pages/Cookies';
+import Checklist from './pages/Checklist';
 import SeminarDetail from './pages/SeminarDetail';
 import NotFound from './pages/NotFound';
 
@@ -26,6 +27,7 @@ function AppContent() {
         <Route path={ROUTES.KONTAKTI} element={<Contacts />} />
         <Route path={ROUTES.PRIVACY} element={<Privacy />} />
         <Route path={ROUTES.COOKIES} element={<Cookies />} />
+        <Route path={ROUTES.CHECKLIST} element={<Checklist />} />
         <Route path="/deynost/:slug" element={<SeminarDetail />} />
 
         {/* Redirects */}

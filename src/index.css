@@ -1414,3 +1414,115 @@ legend {
   height: 300px;
   border: 0;
 }
+
+/* Countdown */
+.countdown {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* Guarantee */
+.guarantee {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--stamp-tint);
+  border-left: 4px solid var(--stamp);
+}
+
+/* Lead magnet */
+.lead-magnet__box {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid var(--rule);
+  background: var(--surface);
+}
+
+.lead-magnet__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lead-magnet .fine {
+  margin: 0;
+}
+
+/* Checklist page */
+.checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  margin-top: 32px;
+}
+
+.checklist h2 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.closing-note {
+  margin-top: 40px;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .lead-magnet__box,
+  .checklist {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Checklist boxes */
+.checklist-actions {
+  margin-top: 24px;
+}
+
+.list--checklist {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list--checklist li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border-top: 0;
+  padding: 6px 0;
+}
+
+.check-box {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  border: 1.5px solid var(--stamp);
+  border-radius: 3px;
+}
+
+@media print {
+  .no-print,
+  .site-header,
+  .notice,
+  .site-footer,
+  .cookie-banner,
+  .skip {
+    display: none !important;
+  }
+
+  .hero,
+  .section {
+    padding: 0;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .checklist {
+    grid-template-columns: 1fr 1fr;
+  }
+}

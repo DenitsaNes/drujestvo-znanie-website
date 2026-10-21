@@ -5,6 +5,7 @@ import Ledger from '../components/Ledger';
 import Steps from '../components/Steps';
 import SeminarRows from '../components/SeminarRows';
 import NewsletterSignup from '../components/NewsletterSignup';
+import LeadMagnet from '../components/LeadMagnet';
 import Faq from '../components/Faq';
 import ClosingCta from '../components/ClosingCta';
 import { SITE, ROUTES, registrationHref } from '../content/site';
@@ -29,6 +30,9 @@ function HeroA() {
           <Link className="btn btn--ghost" to={`${ROUTES.SEMINAR_28_OKT}#programa`}>
             Вижте програмата
           </Link>
+          <a className="btn btn--ghost" href="#checklist">
+            Безплатен checklist
+          </a>
         </div>
         <SeminarSlip />
       </div>
@@ -214,6 +218,7 @@ export default function Home() {
       />
       {SITE.SHOW_SEMINAR_1 ? <HeroA /> : <HeroB />}
       {SITE.SHOW_SEMINAR_1 && <WhatChanges />}
+      <LeadMagnet />
       {SITE.SHOW_SEMINAR_1 && <WhatYouGet />}
       {SITE.SHOW_SEMINAR_1 && <Lecturer />}
       {SITE.SHOW_SEMINAR_1 && <Prices />}

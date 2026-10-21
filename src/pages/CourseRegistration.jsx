@@ -126,6 +126,12 @@ export default function CourseRegistration() {
     setSelectedCourse(courseFromUrl);
   }, [courseFromUrl]);
 
+  useEffect(() => {
+    if (window.dataLayer) {
+      window.dataLayer.push({ event: 'registration_view' });
+    }
+  }, []);
+
   const activeCourse = COURSES.find((c) => c.id === selectedCourse);
   const showColleagues = Number(formData.participants) > 1;
 

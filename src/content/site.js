@@ -77,6 +77,7 @@ export const ROUTES = {
   KORP_DANAK: '/deynost/korp-danak',
   PRIVACY: '/politika-za-poveritelnost',
   COOKIES: '/biskvitki',
+  CHECKLIST: '/checklist',
 };
 
 // Registration link helpers

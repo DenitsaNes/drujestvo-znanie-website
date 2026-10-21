@@ -61,8 +61,8 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="/assets/index-BFywwNto.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DVLKcz9d.css">
+    <script type="module" crossorigin src="/assets/index-x1xuAaCK.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CWcHR-bt.css">
   <meta name="robots" content="noindex">
   </head>
   <body>
@@ -97,6 +97,19 @@
       <input type="checkbox" name="privacy" />
       <input type="text" name="pricePerPerson" />
       <input type="text" name="totalPrice" />
+    </form>
+
+    <!-- Hidden static forms for Netlify detection. -->
+    <form name="newsletter" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="bot-field" />
+      <input type="email" name="email" />
+      <input type="text" name="topics" />
+    </form>
+
+    <form name="lead-magnet" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
     </form>
 
   </body>
