@@ -4,6 +4,7 @@ import { dirname, join } from 'node:path';
 const SITE_URL = 'https://znaniehaskovo.eu';
 const DEFAULT_OG = '/og/znanie.png';
 const SEMINAR_OG = '/og/seminar-28-oktomvri.png';
+const ZKPO_OG = '/og/zkpo-30-oktomvri.png';
 
 const routes = [
   {
@@ -25,7 +26,7 @@ const routes = [
     title: 'Семинар по ЗКПО: годишното приключване на 2026 г. в евро — 30.10.2026',
     description:
       'Практически онлайн семинар с Димитър Войнов на 30 октомври 2026 г. за годишното данъчно приключване по ЗКПО, промените през 2026 г. и очакваните промени през 2027 г. 125 €.',
-    image: SEMINAR_OG,
+    image: ZKPO_OG,
   },
   {
     path: '/zapisi',

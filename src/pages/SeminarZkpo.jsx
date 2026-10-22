@@ -328,7 +328,7 @@ export default function SeminarZkpo() {
         title="Семинар по ЗКПО: годишното приключване на 2026 г. в евро — 30.10.2026"
         description="Практически онлайн семинар с Димитър Войнов на 30 октомври 2026 г. за годишното данъчно приключване по ЗКПО, промените през 2026 г. и очакваните промени през 2027 г. 125 €."
         pathname={ROUTES.SEMINAR_ZKPO_30_OKT}
-        image={SITE.SEMINAR_OG_IMAGE}
+        image={SITE.SEMINAR_ZKPO_OG_IMAGE}
       />
       <Hero />
       <WhyNow />

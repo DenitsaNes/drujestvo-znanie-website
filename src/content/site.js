@@ -57,6 +57,7 @@ export const SITE = {
   SITE_URL: 'https://znaniehaskovo.eu',
   DEFAULT_OG_IMAGE: '/og/znanie.png',
   SEMINAR_OG_IMAGE: '/og/seminar-28-oktomvri.png',
+  SEMINAR_ZKPO_OG_IMAGE: '/og/zkpo-30-oktomvri.png',
 };
 
 // Helper: formatted price with non-breaking space before €
