@@ -1633,3 +1633,7 @@ legend {
   color: var(--stamp-dark);
 }
 
+
+.lecturer--center {
+  align-items: center;
+}

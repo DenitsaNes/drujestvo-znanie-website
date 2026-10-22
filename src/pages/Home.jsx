@@ -8,7 +8,7 @@ import NewsletterSignup from '../components/NewsletterSignup';
 import LeadMagnet from '../components/LeadMagnet';
 import Faq from '../components/Faq';
 import ClosingCta from '../components/ClosingCta';
-import { SITE, ROUTES, registrationHref, fmtPrice } from '../content/site';
+import { SITE, ROUTES, registrationHref } from '../content/site';
 
 function HeroA() {
   return (
@@ -34,7 +34,7 @@ function HeroA() {
             Безплатен checklist
           </a>
         </div>
-        <SeminarSlip />
+        <SeminarSlip showPrice={false} />
       </div>
     </section>
   );
@@ -140,7 +140,7 @@ function Lecturer() {
     <section className="section section--center" id="lektor">
       <div className="wrap">
         <div className="section__head">
-          <h2>Лекторът</h2>
+          <h2>Лекторите</h2>
         </div>
         <div className="lecturer">
           <img
@@ -162,6 +162,32 @@ function Lecturer() {
             </p>
             <p className="measure">
               На семинара ще чуете не само какво пише в закона, но и как да го приложите в своята работа.
+            </p>
+          </div>
+        </div>
+
+        <div className="lecturer lecturer--center" style={{ marginTop: 48 }}>
+          <img
+            className="portrait"
+            src="/dimitar-voynov.jpg"
+            alt={`${SITE.SEM2_LECTURER}, лектор`}
+            width="800"
+            height="1000"
+            loading="lazy"
+          />
+          <div>
+            <h3 style={{ fontSize: '1.75rem' }}>{SITE.SEM2_LECTURER}</h3>
+            <p className="lecturer__role">Асоцииран експерт по ЗКПО, данъчен консултант</p>
+            <p className="measure">
+              Димитър Войнов има дългогодишен опит в данъчното облагане по ЗКПО — данъчни
+              амортизации, данъчни постоянни и временни разлики, преобразуване на финансовия
+              резултат, данъчно третиране на разходи и сделки с търговски дружества.
+            </p>
+            <p className="measure">
+              От 2000 до 2011 г. е експерт в дирекция „Данъчна политика“ в Министерство на
+              финансите, където участва в разработването на ЗКПО и в указанията по прилагането му.
+              От 2011 до 2016 г. преподава в НАП. От 2016 г. работи като лектор, данъчен експерт и
+              консултант.
             </p>
           </div>
         </div>
@@ -205,7 +231,6 @@ function NextSeminar() {
           и съдебната практика.
         </p>
         <div className="next-seminar-bar__actions">
-          <span className="next-seminar-bar__price">{fmtPrice(SITE.SEM2_PRICE)}</span>
           <Link className="btn btn--primary" to={registrationHref({ course: 'zkpo' })}>
             Запишете се
           </Link>
@@ -238,8 +263,8 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Семинар „Трудов стаж в часове от 2027“ — 28 октомври"
-        description="Онлайн семинар с Теодора Дичева за счетоводители, ТРЗ и HR: трудовият стаж в часове от 2027 г. и прозрачност на заплащането. 28 октомври, Zoom, 100 €."
+        title="Семинари за счетоводители, ТРЗ и HR — Дружество „Знание“"
+        description="Практически онлайн семинари с лектори от практиката: трудовият стаж в часове от 2027 г. на 28 октомври и годишното данъчно приключване по ЗКПО на 30 октомври."
         pathname={ROUTES.HOME}
         image={SITE.SEMINAR_OG_IMAGE}
       />
@@ -249,7 +274,6 @@ export default function Home() {
       <LeadMagnet />
       {SITE.SHOW_SEMINAR_1 && <WhatYouGet />}
       {SITE.SHOW_SEMINAR_1 && <Lecturer />}
-      {SITE.SHOW_SEMINAR_1 && <Prices />}
       {SITE.SHOW_SEMINAR_1 && <Steps />}
       <Upcoming />
       {SITE.SHOW_SEMINAR_1 && <Faq />}

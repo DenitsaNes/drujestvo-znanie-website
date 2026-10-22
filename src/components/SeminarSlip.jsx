@@ -1,6 +1,6 @@
 import { SITE, fmtPrice } from '../content/site';
 
-export default function SeminarSlip() {
+export default function SeminarSlip({ showPrice = true }) {
   return (
     <aside className="slip" aria-label="Данни за семинара">
       <div className="slip__head">
@@ -26,19 +26,23 @@ export default function SeminarSlip() {
         <dd>{SITE.SEM1_DURATION}</dd>
         <dt>Лектор</dt>
         <dd>{SITE.SEM1_LECTURER}</dd>
-        <dt>Цена</dt>
-        <dd className="price">
-          {fmtPrice(SITE.PRICE)}
-          <span className="sub">на участник</span>
-        </dd>
-        {SITE.EARLY_PRICE_ACTIVE && (
+        {showPrice && (
           <>
-            <dt data-early>Ранна цена</dt>
-            <dd className="early" data-early>
-              <mark>
-                {fmtPrice(SITE.EARLY_PRICE)} при плащане до {SITE.EARLY_DEADLINE_BG}
-              </mark>
+            <dt>Цена</dt>
+            <dd className="price">
+              {fmtPrice(SITE.PRICE)}
+              <span className="sub">на участник</span>
             </dd>
+            {SITE.EARLY_PRICE_ACTIVE && (
+              <>
+                <dt data-early>Ранна цена</dt>
+                <dd className="early" data-early>
+                  <mark>
+                    {fmtPrice(SITE.EARLY_PRICE)} при плащане до {SITE.EARLY_DEADLINE_BG}
+                  </mark>
+                </dd>
+              </>
+            )}
           </>
         )}
       </dl>

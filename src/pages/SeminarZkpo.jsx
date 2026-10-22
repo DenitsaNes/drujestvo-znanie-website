@@ -203,7 +203,7 @@ function Lecturer() {
         <div className="section__head">
           <h2>Лекторът</h2>
         </div>
-        <div className="lecturer">
+        <div className="lecturer lecturer--center">
           <img
             className="portrait"
             src="/dimitar-voynov.jpg"
@@ -225,10 +225,6 @@ function Lecturer() {
               финансите, където участва в разработването на ЗКПО и в указанията по прилагането му.
               От 2011 до 2016 г. преподава в НАП. От 2016 г. работи като лектор, данъчен експерт и
               консултант.
-            </p>
-            <p className="measure">
-              Магистър по „Счетоводство и контрол“ и „Финанси“ от УНСС. Автор на публикации в
-              областта на преките данъци и счетоводството.
             </p>
           </div>
         </div>
