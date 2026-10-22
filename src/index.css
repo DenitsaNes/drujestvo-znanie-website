@@ -1637,3 +1637,13 @@ legend {
 .lecturer--center {
   align-items: center;
 }
+
+.closing .btn--ghost {
+  border-color: #fff;
+  color: #fff;
+}
+
+.closing .btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
