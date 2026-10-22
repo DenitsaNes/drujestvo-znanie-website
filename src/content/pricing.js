@@ -1,11 +1,16 @@
 import { SITE, fmtPrice } from './site';
 import { isEarlyPriceActive } from '../hooks/useEarlyPrice';
 
-export function calculatePrice({ participants }) {
+export function calculatePrice({
+  participants,
+  price = SITE.PRICE,
+  earlyPrice = SITE.EARLY_PRICE,
+  earlyActive = isEarlyPriceActive(),
+}) {
   const count = Math.max(1, Number(participants) || 1);
-  const early = isEarlyPriceActive();
+  const early = Boolean(earlyActive) && earlyPrice > 0 && earlyPrice < price;
 
-  const perPerson = early ? SITE.EARLY_PRICE : SITE.PRICE;
+  const perPerson = early ? earlyPrice : price;
 
   return {
     perPerson,

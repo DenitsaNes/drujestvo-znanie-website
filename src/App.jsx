@@ -12,6 +12,7 @@ import Privacy from './pages/Privacy';
 import Cookies from './pages/Cookies';
 import Checklist from './pages/Checklist';
 import SeminarDetail from './pages/SeminarDetail';
+import SeminarZkpo from './pages/SeminarZkpo';
 import NotFound from './pages/NotFound';
 
 function AppContent() {
@@ -21,6 +22,7 @@ function AppContent() {
       <Route element={<Layout />}>
         <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.SEMINAR_28_OKT} element={<SeminarOct28 />} />
+        <Route path={ROUTES.SEMINAR_ZKPO_30_OKT} element={<SeminarZkpo />} />
         <Route path={ROUTES.ZAPISI} element={<CourseRegistration />} />
         <Route path={ROUTES.BLAGODARIM} element={<ThankYou />} />
         <Route path={ROUTES.ZA_NAS} element={<About />} />

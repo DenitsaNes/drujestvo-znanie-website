@@ -30,6 +30,17 @@ const COURSES = [
     title: SITE.SEM1_TITLE,
     date: SITE.SEM1_DATE,
     price: SITE.PRICE,
+    earlyPrice: SITE.EARLY_PRICE,
+    earlyActive: SITE.EARLY_PRICE_ACTIVE,
+    active: true,
+  },
+  {
+    id: 'zkpo',
+    title: SITE.SEM2_TITLE,
+    date: SITE.SEM2_DATE,
+    price: SITE.SEM2_PRICE,
+    earlyPrice: 0,
+    earlyActive: false,
     active: true,
   },
   {
@@ -37,6 +48,8 @@ const COURSES = [
     title: 'Данъци върху доходите на физическите лица',
     date: 'януари 2027',
     price: null,
+    earlyPrice: 0,
+    earlyActive: false,
     active: false,
   },
   {
@@ -44,6 +57,8 @@ const COURSES = [
     title: 'Данъкът върху добавената стойност в практиката на бизнеса',
     date: 'януари 2027',
     price: null,
+    earlyPrice: 0,
+    earlyActive: false,
     active: false,
   },
   {
@@ -51,6 +66,8 @@ const COURSES = [
     title: 'Облагане на юридическите лица по ЗКПО',
     date: 'януари 2027',
     price: null,
+    earlyPrice: 0,
+    earlyActive: false,
     active: false,
   },
 ];
@@ -139,8 +156,11 @@ export default function CourseRegistration() {
     () =>
       calculatePrice({
         participants: formData.participants,
+        price: activeCourse?.price ?? SITE.PRICE,
+        earlyPrice: activeCourse?.earlyPrice ?? 0,
+        earlyActive: activeCourse?.earlyActive ?? false,
       }),
-    [formData.participants]
+    [formData.participants, activeCourse]
   );
 
   const handleChange = (e) => {

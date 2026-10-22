@@ -8,7 +8,7 @@ import NewsletterSignup from '../components/NewsletterSignup';
 import LeadMagnet from '../components/LeadMagnet';
 import Faq from '../components/Faq';
 import ClosingCta from '../components/ClosingCta';
-import { SITE, ROUTES, registrationHref } from '../content/site';
+import { SITE, ROUTES, registrationHref, fmtPrice } from '../content/site';
 
 function HeroA() {
   return (
@@ -191,6 +191,33 @@ function Prices() {
   );
 }
 
+function NextSeminar() {
+  return (
+    <section className="section next-seminar-bar" id="zkpo">
+      <div className="wrap">
+        <p className="hero__context">
+          {SITE.SEM2_DATE_SHORT}, {SITE.SEM2_TIME}, онлайн в Zoom
+        </p>
+        <h2 className="hero__h1">{SITE.SEM2_TITLE}</h2>
+        <p className="hero__lead">
+          Цял ден практически семинар с {SITE.SEM2_LECTURER} за счетоводители, финансови специалисти
+          и управители. Ще минем през данъчните разлики, амортизациите, дивидентите, промените в ЗКПО
+          и съдебната практика.
+        </p>
+        <div className="next-seminar-bar__actions">
+          <span className="next-seminar-bar__price">{fmtPrice(SITE.SEM2_PRICE)}</span>
+          <Link className="btn btn--primary" to={registrationHref({ course: 'zkpo' })}>
+            Запишете се
+          </Link>
+          <Link className="btn btn--ghost" to={ROUTES.SEMINAR_ZKPO_30_OKT}>
+            Вижте програмата
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Upcoming() {
   return (
     <section className="section section--center" id="yanuari">
@@ -217,6 +244,7 @@ export default function Home() {
         image={SITE.SEMINAR_OG_IMAGE}
       />
       {SITE.SHOW_SEMINAR_1 ? <HeroA /> : <HeroB />}
+      <NextSeminar />
       {SITE.SHOW_SEMINAR_1 && <WhatChanges />}
       <LeadMagnet />
       {SITE.SHOW_SEMINAR_1 && <WhatYouGet />}

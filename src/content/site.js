@@ -23,6 +23,16 @@ export const SITE = {
   SEM1_ZOOM: 'Онлайн в Zoom',
   SEM1_DURATION: '4 часа',
 
+  // Seminar 2 — 30 October 2026 (ЗКПО)
+  SEM2_TITLE: 'Годишното данъчно приключване на 2026 г. по ЗКПО в евро',
+  SEM2_DATE: '30 октомври 2026 г., петък',
+  SEM2_DATE_SHORT: '30 октомври 2026 г.',
+  SEM2_TIME: '9:00 – 16:00',
+  SEM2_LECTURER: 'Димитър Войнов',
+  SEM2_ZOOM: 'Онлайн в Zoom',
+  SEM2_DURATION: 'цял ден',
+  SEM2_PRICE: 125,
+
   // Pricing
   PRICE: 100,
   EARLY_PRICE: 85,
@@ -68,6 +78,7 @@ export function currentYear() {
 export const ROUTES = {
   HOME: '/',
   SEMINAR_28_OKT: '/seminar-trudov-stazh-28-oktomvri',
+  SEMINAR_ZKPO_30_OKT: '/seminar-zkpo-30-oktomvri',
   ZAPISI: '/zapisi',
   BLAGODARIM: '/blagodarim',
   ZA_NAS: '/za-nas',
