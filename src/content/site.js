@@ -46,7 +46,7 @@ export const SITE = {
   // Early price switch
   // При true ранната цена се рендерира; при false се крие и в статичното HTML липсва.
   // Превключете на false и прекомпилирайте след EARLY_DEADLINE_ISO.
-  EARLY_PRICE_ACTIVE: true,
+  EARLY_PRICE_ACTIVE: false,
 
   // Feature flags
   // true = Variant A (home page focuses on the 28 October seminar until 28.10.2026)
