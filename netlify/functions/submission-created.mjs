@@ -1,6 +1,4 @@
-import { SITE } from '../../src/content/site.js';
-
-const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
+const HUBSPOT_UPSERT_URL = 'https://api.hubapi.com/crm/v3/objects/contacts/batch/upsert';
 
 function getField(payload, name) {
   const value = payload?.data?.[name];
@@ -8,20 +6,92 @@ function getField(payload, name) {
   return String(value).trim();
 }
 
-function fmtPrice(amount) {
-  const n = Number(amount);
-  return Number.isFinite(n) ? `${n} €` : amount;
+function splitName(full) {
+  const parts = String(full || '').trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return { first: '', last: '' };
+  if (parts.length === 1) return { first: parts[0], last: '' };
+  return { first: parts[0], last: parts.slice(1).join(' ') };
+}
+
+function mapFormToHubSpot(formName, payload) {
+  const email = getField(payload, 'email');
+  if (!email) return null;
+
+  const name = splitName(getField(payload, 'name'));
+  const course = getField(payload, 'course');
+
+  const props = {
+    email,
+    firstname: name.first,
+    lastname: name.last,
+    phone: getField(payload, 'phone'),
+    company: getField(payload, 'invoiceCompany') || getField(payload, 'company'),
+    crm_source: 'Website',
+  };
+
+  if (formName === 'registration') {
+    props.lifecyclestage = 'marketingqualifiedlead';
+    props.crm_status = 'Signed up';
+    if (course) props.crm_seminars = course;
+  } else {
+    props.lifecyclestage = '6313258222';
+    props.crm_status = 'New';
+  }
+
+  // Drop empty values so we don't overwrite existing HubSpot data.
+  Object.keys(props).forEach((key) => {
+    if (props[key] === '') delete props[key];
+  });
+
+  return { email, props };
+}
+
+async function pushToHubSpot(formName, payload) {
+  const token = process.env.HUBSPOT_TOKEN;
+  if (!token) {
+    console.log('HUBSPOT_TOKEN not set; skipping HubSpot.');
+    return;
+  }
+
+  const mapped = mapFormToHubSpot(formName, payload);
+  if (!mapped) {
+    console.log('No email in submission; skipping HubSpot.');
+    return;
+  }
+
+  const body = {
+    inputs: [
+      {
+        idProperty: 'email',
+        id: mapped.email,
+        properties: mapped.props,
+      },
+    ],
+  };
+
+  try {
+    const res = await fetch(HUBSPOT_UPSERT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.log('HubSpot error:', res.status, text);
+    } else {
+      const json = await res.json().catch(() => null);
+      console.log('HubSpot contact upserted:', mapped.email, json?.results?.length || 1);
+    }
+  } catch (err) {
+    console.log('HubSpot request failed:', err.message);
+  }
 }
 
 export default async (request) => {
-  const apiKey = process.env.BREVO_API_KEY;
-  const senderEmail = process.env.BREVO_SENDER_EMAIL;
-
-  if (!apiKey || !senderEmail) {
-    console.log('BREVO_API_KEY or BREVO_SENDER_EMAIL not set; skipping email.');
-    return new Response('OK', { status: 200 });
-  }
-
   let body;
   try {
     body = await request.json();
@@ -34,99 +104,12 @@ export default async (request) => {
   const payload = body?.payload || body || {};
   const formName = payload?.form_name || payload?.formName || '';
 
-  if (formName !== 'registration') {
-    console.log(`Form ${formName} submitted; no auto-reply needed.`);
+  if (!formName) {
+    console.log('No form name in submission; skipping.');
     return new Response('OK', { status: 200 });
   }
 
-  const name = getField(payload, 'name');
-  const email = getField(payload, 'email');
-  const total = getField(payload, 'totalPrice');
-  const perPerson = getField(payload, 'pricePerPerson');
-
-  if (!email) {
-    console.log('No registrant email found; skipping email.');
-    return new Response('OK', { status: 200 });
-  }
-
-  const subject = `Потвърждение на записването — ${SITE.ORG}`;
-  const reason = `Семинар 28.10 — ${name || 'участник'}`;
-
-  const text = [
-    `Здравейте, ${name || ''}`,
-    '',
-    `Благодарим за записването за семинара „${SITE.SEM1_TITLE}“.`,
-    `Дата: ${SITE.SEM1_DATE_SHORT}, ${SITE.SEM1_TIME} ч., ${SITE.SEM1_ZOOM}.`,
-    '',
-    'Данни за плащане по банков път:',
-    `Получател: ${SITE.ORG}`,
-    `IBAN: ${SITE.BANK_IBAN}`,
-    `BIC/SWIFT: ${SITE.BANK_BIC}`,
-    `Сума: ${fmtPrice(total || perPerson || SITE.EARLY_PRICE || SITE.PRICE)}`,
-    `Основание: ${reason}`,
-    '',
-    'Мястото Ви е потвърдено, когато плащането постъпи.',
-    '',
-    'Ако имате въпроси, свържете се с нас.',
-    `${SITE.ORG}`,
-  ].join('\n');
-
-  const html = [
-    `<p>Здравейте, ${escapeHtml(name || '')},</p>`,
-    `<p>Благодарим за записването за семинара „${escapeHtml(SITE.SEM1_TITLE)}“.</p>`,
-    `<p><strong>Дата:</strong> ${escapeHtml(SITE.SEM1_DATE_SHORT)}, ${escapeHtml(
-      SITE.SEM1_TIME
-    )} ч., ${escapeHtml(SITE.SEM1_ZOOM)}.</p>`,
-    '<h3>Данни за плащане по банков път</h3>',
-    '<ul>',
-    `<li><strong>Получател:</strong> ${escapeHtml(SITE.ORG)}</li>`,
-    `<li><strong>IBAN:</strong> ${escapeHtml(SITE.BANK_IBAN)}</li>`,
-    `<li><strong>BIC/SWIFT:</strong> ${escapeHtml(SITE.BANK_BIC)}</li>`,
-    `<li><strong>Сума:</strong> ${escapeHtml(
-      fmtPrice(total || perPerson || SITE.EARLY_PRICE || SITE.PRICE)
-    )}</li>`,
-    `<li><strong>Основание:</strong> ${escapeHtml(reason)}</li>`,
-    '</ul>',
-    '<p><strong>Важно:</strong> Мястото Ви е потвърдено, когато плащането постъпи.</p>',
-    `<p>Ако имате въпроси, свържете се с нас.</p>`,
-    `<p>${escapeHtml(SITE.ORG)}</p>`,
-  ].join('\n');
-
-  try {
-    const response = await fetch(BREVO_API_URL, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'api-key': apiKey,
-      },
-      body: JSON.stringify({
-        sender: { name: SITE.ORG, email: senderEmail },
-        to: [{ email }],
-        subject,
-        htmlContent: html,
-        textContent: text,
-      }),
-    });
-
-    if (!response.ok) {
-      const body = await response.text();
-      console.log('Brevo API error:', response.status, body);
-    } else {
-      console.log('Confirmation email sent to', email);
-    }
-  } catch (err) {
-    console.log('Error sending email:', err.message);
-  }
+  await pushToHubSpot(formName, payload);
 
   return new Response('OK', { status: 200 });
 };
-
-function escapeHtml(text) {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
