@@ -1,99 +1,145 @@
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import SeminarSlip from '../components/SeminarSlip';
-import Ledger from '../components/Ledger';
+import SeminarSlipZkpo from '../components/SeminarSlipZkpo';
 import Steps from '../components/Steps';
 import SeminarRows from '../components/SeminarRows';
 import NewsletterSignup from '../components/NewsletterSignup';
-import LeadMagnet from '../components/LeadMagnet';
 import Faq from '../components/Faq';
-import ClosingCta from '../components/ClosingCta';
 import { SITE, ROUTES, registrationHref } from '../content/site';
 
-function HeroA() {
+const ZKPO_FAQ = [
+  {
+    question: 'Ще има ли запис?',
+    answer:
+      'Не. Семинарът е на живо, за да можете да задавате въпроси. Материалите и презентацията получавате след това.',
+  },
+  {
+    question: 'Ще получа ли фактура?',
+    answer:
+      'Да, издаваме документ за платената такса на името на Вашата фирма. Във формата има поле за данни за фактура.',
+  },
+  {
+    question: 'Мога ли да задам въпрос предварително?',
+    answer:
+      'Да. Във формата за записване има поле „Въпрос към лектора“. Подбраните въпроси ще бъдат разгледани на семинара.',
+  },
+  {
+    question: 'Какво ми трябва, за да се включа?',
+    answer:
+      'Компютър или телефон с интернет и Zoom. Влезте с името, с което сте се записали.',
+  },
+  {
+    question: 'Мога ли да прехвърля участието на колега?',
+    answer:
+      'Да, можете да прехвърлите участието без доплащане. Пишете ни до деня преди семинара.',
+  },
+  {
+    question: 'Подходящ ли е за малки фирми?',
+    answer:
+      'Да. Ще разгледаме както общите правила, така и случаите, които засягат по-малките организации.',
+  },
+];
+
+function Hero() {
   return (
     <section className="hero">
       <div className="wrap hero__grid">
         <div className="hero__text">
-          <p className="hero__context">Онлайн семинар за счетоводители, ТРЗ и HR специалисти</p>
-          <h1>От 2027 г. трудовият стаж се смята в часове. Подгответе се на 28 октомври.</h1>
+          <p className="hero__context">{SITE.SEM2_DATE_SHORT}, онлайн в Zoom</p>
+          <h1>
+            Годишното данъчно приключване на 2026 г. по ЗКПО е в еврото. Подгответе се на 30 октомври.
+          </h1>
           <p className="hero__lead">
-            Четири часа с {SITE.SEM1_LECTURER} — юрист, дългогодишен служител на ИА „Главна инспекция по труда“
-            и бивш директор на нейната правна дирекция. Ще видите какво се променя при трудовия стаж и при
-            прозрачността на заплащането и какво да подготвите в документите си още сега.
+            Цял ден практически семинар с {SITE.SEM2_LECTURER} — данъчен консултант, участвал в
+            разработването на ЗКПО в Министерство на финансите. Ще минем през данъчните разлики,
+            амортизациите, дивидентите и съдебната практика.
           </p>
         </div>
         <div className="hero__actions">
-          <Link className="btn btn--primary" to={registrationHref({ course: 'trudov-kodeks' })}>
-            Запишете се за 28 октомври
+          <Link className="btn btn--primary" to={registrationHref({ course: 'zkpo' })}>
+            Запишете се за 30 октомври
           </Link>
-          <Link className="btn btn--ghost" to={`${ROUTES.SEMINAR_28_OKT}#programa`}>
+          <Link className="btn btn--ghost" to={`${ROUTES.SEMINAR_ZKPO_30_OKT}#programa`}>
             Вижте програмата
           </Link>
-          <a className="btn btn--ghost" href="#checklist">
-            Безплатен checklist
-          </a>
         </div>
-        <SeminarSlip showPrice={false} />
+        <SeminarSlipZkpo showPrice={false} />
       </div>
     </section>
   );
 }
 
-function HeroB() {
+function Program() {
   return (
-    <section className="hero">
-      <div className="wrap hero__grid" style={{ gridTemplateColumns: '1fr' }}>
-        <div>
-          <p className="hero__context">Онлайн семинари за счетоводители, ТРЗ и HR специалисти</p>
-          <h1>Практически семинари по данъчно и трудово законодателство</h1>
-          <p className="hero__lead">
-            Онлайн семинари за счетоводители, ТРЗ и HR специалисти с лектори, които познават практиката.
-            Следващите са през януари 2027.
-          </p>
-          <div className="actions">
-            <Link className="btn btn--primary" to={`${ROUTES.HOME}#yanuari`}>
-              Вижте семинарите за януари
-            </Link>
-            <Link className="btn btn--ghost" to={`${ROUTES.HOME}#newsletter`}>
-              Абонирайте се за новините
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function WhatChanges() {
-  return (
-    <section className="section section--center" id="seminari">
+    <section className="section" id="seminari">
       <div className="wrap">
         <div className="section__head">
-          <h2>Две промени, които засягат всяко ТРЗ</h2>
+          <h2>Програма</h2>
         </div>
-        <div className="two two--center">
+        <div className="two">
           <div>
-            <h3>Трудовият стаж в часове</h3>
-            <p className="measure">
-              Стажът вече няма да се смята само в дни. Това променя сметките при непълно работно време,
-              при повече от един трудов договор и при сумирано отчитане на работното време — и начина, по
-              който стажът се документира.
+            <h3>Част 1. Подготовка за годишното данъчно приключване на 2026 г. в евро</h3>
+            <ul className="list list--bulleted" style={{ marginTop: 12 }}>
+              <li>ефект от въвеждането на еврото върху годишното приключване</li>
+              <li>данъчни постоянни разлики</li>
+              <li>данъчни временни разлики</li>
+              <li>други суми, с които се преобразува финансовият резултат</li>
+              <li>данъчен амортизационен план</li>
+              <li>данъчни загуби</li>
+              <li>дивиденти</li>
+              <li>данъци върху разходите</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Част 2. Промени в ЗКПО през 2026 г.</h3>
+            <ul className="list list--bulleted" style={{ marginTop: 12 }}>
+              <li>данъчно облекчение, свързано с пазар за растеж</li>
+              <li>регламентиране на валутния курс за чуждестранна валута</li>
+              <li>редакционни промени в глобалния данък</li>
+              <li>ускорена данъчна амортизация за електрически автомобили</li>
+              <li>данъчно облекчение за научноизследователска и развойна дейност</li>
+            </ul>
+          </div>
+        </div>
+        <div className="two" style={{ marginTop: 40 }}>
+          <div>
+            <h3>Част 3. Очаквани промени в ЗКПО през 2027 г.</h3>
+            <p className="measure" style={{ marginTop: 8 }}>
+              Какво предстои и как да се подготвите предварително.
             </p>
           </div>
           <div>
-            <h3>Прозрачност на заплащането</h3>
-            <p className="measure">
-              Европейските правила за равно заплащане изискват обективни критерии за възнагражденията,
-              информация за заплащането при поискване и вътрешни правила, които издържат на проверка.
+            <h3>Част 4. Данъчна и съдебна практика</h3>
+            <p className="measure" style={{ marginTop: 8 }}>
+              Актуална практика по прилагането на ЗКПО и отговори на въпроси.
             </p>
           </div>
         </div>
-        <div style={{ textAlign: 'center' }}>
-          <Link className="textlink" to={`${ROUTES.SEMINAR_28_OKT}#programa`}>
+        <div style={{ marginTop: 28, textAlign: 'center' }}>
+          <Link className="textlink" to={`${ROUTES.SEMINAR_ZKPO_30_OKT}#programa`}>
             Вижте цялата програма
           </Link>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function AfterSeminar() {
+  return (
+    <section className="section">
+      <div className="wrap">
+        <div className="section__head">
+          <h2>След семинара ще можете</h2>
+        </div>
+        <ul className="list list--bulleted">
+          <li>правилно да преобразувате финансовия резултат за 2026 г.;</li>
+          <li>да приложите новите данъчни облекчения;</li>
+          <li>да отразите ефекта от еврото в годишното приключване;</li>
+          <li>да проверите данъчния амортизационен план и загубите;</li>
+          <li>да отразите дивидентите и данъците върху разходите;</li>
+          <li>да се подготвите за очакваните промени през 2027 г.</li>
+        </ul>
       </div>
     </section>
   );
@@ -110,22 +156,31 @@ function WhatYouGet() {
           <div className="ready-pack-col">
             <h3>С участието получавате</h3>
             <ul className="list">
-              <li>Четири часа практическо обучение с {SITE.SEM1_LECTURER}</li>
-              <li>Учебни материали</li>
+              <li>Цял ден практическо обучение с {SITE.SEM2_LECTURER}</li>
+              <li>Учебни материали и презентация</li>
               <li>Сертификат за участие</li>
               <li>Време за Вашите въпроси по време на семинара</li>
             </ul>
           </div>
           <div className="ready-pack-col">
-            <h3>2027 READY PACK</h3>
+            <h3>2026 READY PACK</h3>
+            <p className="pack-intro">Практически материали, които ползвате и след семинара:</p>
             <ul className="list">
               <li>
-                <strong>Практически казуси</strong> — непълно работно време, повече от един договор,
-                изчисляване на стажа, възнаграждения.
+                <strong>Работни материали</strong> — структура на годишното приключване и
+                преобразуване на финансовия резултат.
+              </li>
+              <li>
+                <strong>Практически казуси</strong> — данъчни разлики, амортизации, дивиденти и
+                данъци върху разходите.
               </li>
               <li>
                 <strong>Актуализация</strong> — при съществени промени в разгледаните правила ще Ви
                 изпратим обновена информация.
+              </li>
+              <li>
+                <strong>Въпрос към лектора</strong> — опишете казуса си при записването. Част от
+                въпросите ще бъдат разгледани на семинара.
               </li>
             </ul>
           </div>
@@ -140,33 +195,9 @@ function Lecturer() {
     <section className="section section--center" id="lektor">
       <div className="wrap">
         <div className="section__head">
-          <h2>Лекторите</h2>
+          <h2>Лекторът</h2>
         </div>
-        <div className="lecturer">
-          <img
-            className="portrait"
-            src="/teodora-dicheva.png"
-            alt={`${SITE.SEM1_LECTURER}, лектор`}
-            width="800"
-            height="1000"
-            loading="lazy"
-          />
-          <div>
-            <h3 style={{ fontSize: '1.75rem' }}>{SITE.SEM1_LECTURER}</h3>
-            <p className="lecturer__role">Юрист, експерт по трудово законодателство</p>
-            <p className="measure">
-              {SITE.SEM1_LECTURER} има дългогодишен опит в трудовото право и инспектирането на труда.
-              Години наред е работила в ИА „Главна инспекция по труда“, включително като директор на
-              правната дирекция. Автор е на множество практически материали, коментари, сборници и
-              наръчници по трудово законодателство.
-            </p>
-            <p className="measure">
-              На семинара ще чуете не само какво пише в закона, но и как да го приложите в своята работа.
-            </p>
-          </div>
-        </div>
-
-        <div className="lecturer lecturer--center" style={{ marginTop: 48 }}>
+        <div className="lecturer lecturer--center">
           <img
             className="portrait"
             src="/dimitar-voynov.jpg"
@@ -196,53 +227,6 @@ function Lecturer() {
   );
 }
 
-function Prices() {
-  return (
-    <section className="section section--center" id="ceni">
-      <div className="wrap">
-        <div className="section__head">
-          <h2>Цени</h2>
-        </div>
-        <Ledger />
-        <div className="actions" style={{ marginTop: 28 }}>
-          <Link className="btn btn--primary" to={registrationHref({ course: 'trudov-kodeks' })}>
-            Запишете се
-          </Link>
-          <Link className="btn btn--ghost" to={registrationHref({ group: true, course: 'trudov-kodeks' })}>
-            Запишете група
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function NextSeminar() {
-  return (
-    <section className="section next-seminar-bar" id="zkpo">
-      <div className="wrap">
-        <p className="hero__context">
-          {SITE.SEM2_DATE_SHORT}, {SITE.SEM2_TIME}, онлайн в Zoom
-        </p>
-        <h2 className="hero__h1">{SITE.SEM2_TITLE}</h2>
-        <p className="hero__lead">
-          Цял ден практически семинар с {SITE.SEM2_LECTURER} за счетоводители, финансови специалисти
-          и управители. Ще минем през данъчните разлики, амортизациите, дивидентите, промените в ЗКПО
-          и съдебната практика.
-        </p>
-        <div className="next-seminar-bar__actions">
-          <Link className="btn btn--primary" to={registrationHref({ course: 'zkpo' })}>
-            Запишете се
-          </Link>
-          <Link className="btn btn--ghost" to={ROUTES.SEMINAR_ZKPO_30_OKT}>
-            Вижте програмата
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Upcoming() {
   return (
     <section className="section section--center" id="yanuari">
@@ -259,25 +243,40 @@ function Upcoming() {
   );
 }
 
+function Closing() {
+  return (
+    <section className="closing">
+      <div className="wrap">
+        <h2>Годишното приключване идва, независимо дали сте готови</h2>
+        <p>Подгответе се на 30 октомври.</p>
+        <div className="actions">
+          <Link className="btn btn--primary" to={registrationHref({ course: 'zkpo' })}>
+            Запишете се за 30 октомври
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <>
       <SEO
-        title="Семинари за счетоводители, ТРЗ и HR — Дружество „Знание“"
-        description="Практически онлайн семинари с лектори от практиката: трудовият стаж в часове от 2027 г. на 28 октомври и годишното данъчно приключване по ЗКПО на 30 октомври."
+        title="Семинар по ЗКПО: годишното приключване на 2026 г. в евро — 30 октомври"
+        description="Практически онлайн семинар с Димитър Войнов за годишното данъчно приключване по ЗКПО, промените през 2026 г. и очакваните промени през 2027 г. 30 октомври, Zoom."
         pathname={ROUTES.HOME}
-        image={SITE.SEMINAR_OG_IMAGE}
+        image={SITE.SEMINAR_ZKPO_OG_IMAGE}
       />
-      {SITE.SHOW_SEMINAR_1 ? <HeroA /> : <HeroB />}
-      <NextSeminar />
-      {SITE.SHOW_SEMINAR_1 && <WhatChanges />}
-      <LeadMagnet />
-      {SITE.SHOW_SEMINAR_1 && <WhatYouGet />}
-      {SITE.SHOW_SEMINAR_1 && <Lecturer />}
-      {SITE.SHOW_SEMINAR_1 && <Steps />}
+      <Hero />
+      <Program />
+      <AfterSeminar />
+      <WhatYouGet />
+      <Lecturer />
+      <Steps />
       <Upcoming />
-      {SITE.SHOW_SEMINAR_1 && <Faq />}
-      {SITE.SHOW_SEMINAR_1 && <ClosingCta />}
+      <Faq items={ZKPO_FAQ} title="Често задавани въпроси" />
+      <Closing />
     </>
   );
 }

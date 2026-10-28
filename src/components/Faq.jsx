@@ -32,12 +32,17 @@ const FAQ = [
   },
 ];
 
-export default function Faq() {
+export default function Faq({ items = FAQ, title }) {
   return (
     <section className="section">
       <div className="wrap">
+        {title && (
+          <div className="section__head">
+            <h2>{title}</h2>
+          </div>
+        )}
         <div className="faq">
-          {FAQ.map((item) => (
+          {items.map((item) => (
             <details key={item.question}>
               <summary>{item.question}</summary>
               <p>{item.answer}</p>

@@ -4,7 +4,7 @@ import { SITE, ROUTES, registrationHref } from '../content/site';
 
 const navItems = [
   { to: `${ROUTES.HOME}#seminari`, label: 'Семинари' },
-  { to: `${ROUTES.HOME}#ceni`, label: 'Цени' },
+  { to: `${ROUTES.SEMINAR_ZKPO_30_OKT}#ceni`, label: 'Цени' },
   { to: `${ROUTES.HOME}#lektor`, label: 'Лектор' },
   { to: ROUTES.ZA_NAS, label: 'За нас' },
   { to: ROUTES.KONTAKTI, label: 'Контакти' },

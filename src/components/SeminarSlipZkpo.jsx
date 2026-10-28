@@ -1,6 +1,6 @@
 import { SITE, fmtPrice } from '../content/site';
 
-export default function SeminarSlipZkpo() {
+export default function SeminarSlipZkpo({ showPrice = true }) {
   return (
     <aside className="slip" aria-label="Данни за семинара">
       <div className="slip__head">
@@ -21,11 +21,15 @@ export default function SeminarSlipZkpo() {
         <dd>{SITE.SEM2_DURATION}</dd>
         <dt>Лектор</dt>
         <dd>{SITE.SEM2_LECTURER}</dd>
-        <dt>Цена</dt>
-        <dd className="price">
-          {fmtPrice(SITE.SEM2_PRICE)}
-          <span className="sub">на участник</span>
-        </dd>
+        {showPrice && (
+          <dt>Цена</dt>
+        )}
+        {showPrice && (
+          <dd className="price">
+            {fmtPrice(SITE.SEM2_PRICE)}
+            <span className="sub">на участник</span>
+          </dd>
+        )}
       </dl>
     </aside>
   );

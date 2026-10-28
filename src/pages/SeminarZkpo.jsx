@@ -235,7 +235,7 @@ function Lecturer() {
 
 function Groups() {
   return (
-    <section className="section">
+    <section className="section" id="ceni">
       <div className="wrap">
         <div className="section__head">
           <h2>Идвате с колеги?</h2>

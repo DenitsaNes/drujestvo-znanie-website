@@ -28,7 +28,7 @@ export default function Footer() {
         </div>
         <ul>
           <li><Link to={`${ROUTES.HOME}#seminari`}>Семинари</Link></li>
-          <li><Link to={`${ROUTES.HOME}#ceni`}>Цени</Link></li>
+          <li><Link to={`${ROUTES.SEMINAR_ZKPO_30_OKT}#ceni`}>Цени</Link></li>
           <li><Link to={ROUTES.ZA_NAS}>За нас</Link></li>
           <li><Link to={ROUTES.KONTAKTI}>Контакти</Link></li>
           <li><Link to={ROUTES.PRIVACY}>Политика за поверителност</Link></li>
